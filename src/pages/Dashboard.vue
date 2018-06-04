@@ -19,10 +19,20 @@
       </div>
     </div>
 
+    <!--Dropzone-->
+    <div class="row">
+      <div class="col-md-12">
+        <card>
+          <dropzone>
+          </dropzone>
+        </card>
+      </div>
+    </div>
+
     <!--Charts-->
     <div class="row">
 
-      <div class="col-12">
+<!--       <div class="col-12">
         <chart-card title="Users behavior"
                     sub-title="24 Hours performance"
                     :chart-data="usersChart.data"
@@ -66,19 +76,23 @@
             <i class="fa fa-circle text-warning"></i> BMW 5 Series
           </div>
         </chart-card>
-      </div>
+      </div> -->
 
     </div>
 
   </div>
 </template>
+
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
+import Dropzone from '@/components/Dropzone/Dropzone';
 import Chartist from 'chartist';
+
 export default {
   components: {
     StatsCard,
-    ChartCard
+    ChartCard,
+    Dropzone
   },
   /**
    * Chart data used to render stats, charts. Should be replaced with server data
