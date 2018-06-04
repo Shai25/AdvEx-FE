@@ -60,6 +60,9 @@ $danger-states-color: #B33C12 !default;
 
 $link-disabled-color: #666666 !default;
 
+$dark-gray: #282828;
+$darkest-gray: #333;
+
 /*      light colors - used for select dropdown         */
 
 $light-blue: rgba($primary-color, .2);
@@ -67,6 +70,11 @@ $light-azure: rgba($info-color, .2);
 $light-green: rgba($success-color, .2);
 $light-orange: rgba($warning-color, .2);
 $light-red: rgba($danger-color, .2);
+
+//Auth
+$top-nav-bg: $darkest-gray;
+$auth-wallpaper-ivuestic-h: 42px;
+$auth-wallpaper-oblique-line: $dark-gray;
 
 //== Components
 //
