@@ -16,6 +16,9 @@
 import axios from 'axios';
 import { PaperTable } from "@/components";
 
+// TODO: link submission ID to detail page
+// TODO: format status
+// TODO: format timestamp
 const columnNames = ["Submission ID", "Model Name", "Status", "Created At"];
 const columnKeys = ["submission_id", "model_name", "status", "created_at"];
 
