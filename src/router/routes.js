@@ -1,14 +1,35 @@
 import DashboardLayout from "@/layout/dashboard/DashboardLayout.vue";
+import AuthLayout from "@/layout/auth/AuthLayout.vue";
 // GeneralViews
 import NotFound from "@/pages/NotFoundPage.vue";
 
-// Admin pages
+// Auth pages
+import LogIn from "@/pages/LogIn.vue";
+import SignUp from "@/pages/SignUp.vue";
+
+// Dashboard pages
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import SubmissionHistory from "@/pages/SubmissionHistory.vue";
 import SubmissionDetail from "@/pages/SubmissionDetail.vue";
 
 const routes = [
+  {
+    path: "/auth",
+    component: AuthLayout,
+    children: [
+      {
+        path: "login",
+        name: "Log In",
+        component: LogIn
+      },
+      {
+        path: "signup",
+        name: "Sign Up",
+        component: SignUp
+      }
+    ]
+  },
   {
     path: "/",
     component: DashboardLayout,
