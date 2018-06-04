@@ -1,17 +1,21 @@
 <template>
   <div class="login">
-    <h2>Welcome</h2>
+    <h2>Log In</h2>
     <form @submit.prevent>
       <div class="form-group">
         <div class="input-group">
-          <input type="text" id="email" required="required"/>
-          <label class="control-label" for="email">Email</label><i class="bar"></i>
+          <label class="control-label col-sm-4" for="email">Email</label><i class="bar"></i>
+          <div class="col-sm-8">
+            <input type="text" id="email" required="required"/>
+          </div>
         </div>
       </div>
       <div class="form-group">
         <div class="input-group">
-          <input type="password" id="password" required="required"/>
-          <label class="control-label" for="password">Password</label><i class="bar"></i>
+          <label class="control-label col-sm-4" for="password">Password</label><i class="bar"></i>
+          <div class="col-sm-8">
+            <input type="password" id="password" required="required"/>
+          </div>
         </div>
       </div>
       <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between down-container">
