@@ -2,8 +2,10 @@
   <div class="auth-layout">
     <div class="nav d-lg-none"><router-link class="i-vuestic" :to="{path: '/'}"></router-link></div>
     <div class="main row">
-      <div class="auth-content col-lg-6 col-12">
-        <router-view></router-view>
+      <div class="auth-content col-lg-6 col-12 main-panel">
+        <card>
+          <router-view></router-view>
+        </card>
       </div>
       <div class="auth-wallpaper col-6 d-none d-lg-flex">
         <div class="oblique"></div>
@@ -46,7 +48,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
+        // background-color: white;
       }
       .auth-wallpaper {
         // background-color: $top-nav-bg;
@@ -57,8 +59,10 @@ export default {
         justify-content: center;
         .i-vuestic {
           z-index: 2;
-          height: $auth-wallpaper-ivuestic-h;
+          height: 5rem;
           width: 100%;
+          display: inline-block;
+          background: url('../../assets/img/advex-banner.svg') no-repeat center center;
         }
         .oblique {
           position: absolute;
