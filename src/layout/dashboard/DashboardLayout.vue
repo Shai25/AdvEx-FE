@@ -7,21 +7,6 @@
         <sidebar-link to="/history" name="Submission History" icon="ti-view-list-alt"/>
         <sidebar-link to="/submission" name="Submission Detail" icon="ti-info-alt"/>
       </template>
-      <mobile-menu>
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="ti-panel"></i>
-            <p>Stats</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="ti-settings"></i>
-            <p>Settings</p>
-          </a>
-        </li>
-        <li class="divider"></li>
-      </mobile-menu>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
