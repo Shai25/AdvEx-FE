@@ -2,7 +2,7 @@
   <table class="table" :class="tableClass">
     <thead>
     <slot name="columns">
-      <th v-for="column in columns" :key="column">{{column}}</th>
+      <th v-for="column in headers" :key="column">{{column}}</th>
     </slot>
     </thead>
     <tbody>
@@ -22,6 +22,7 @@
 export default {
   name: 'paper-table',
   props: {
+    headers: Array,
     columns: Array,
     data: Array,
     type: {
