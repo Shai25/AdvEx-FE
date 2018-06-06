@@ -1,12 +1,12 @@
 <template>
   <div class="login">
     <h2>Log In</h2>
-    <form @submit.prevent>
+    <form @submit.prevent="login">
       <div class="form-group">
         <div class="input-group">
           <label class="control-label col-sm-4" for="email">Email</label><i class="bar"></i>
           <div class="col-sm-8">
-            <input type="text" id="email" required="required"/>
+            <input type="email" id="email" required="required" v-model="email"/>
           </div>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <div class="input-group">
           <label class="control-label col-sm-4" for="password">Password</label><i class="bar"></i>
           <div class="col-sm-8">
-            <input type="password" id="password" required="required"/>
+            <input type="password" id="password" required="required" v-model="password"/>
           </div>
         </div>
       </div>
@@ -27,9 +27,40 @@
 </template>
 
 <script>
-  export default {
-    name: 'login'
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+
+  methods: {
+    login: function() {
+      // TODO: get API from config
+      axios.post('https://private-8bf72-advex.apiary-mock.com/login',
+        {
+          'email': this.email,
+          'password': this.password
+        },
+        {
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      )
+      .then(response => {
+        console.log(response)
+        if (response.status == 200) {
+          // alert('success')
+          this.$router.push('/')
+        }
+      })
+      .catch(e => {})
+    }
   }
+}
 </script>
 
 <style lang="scss">
