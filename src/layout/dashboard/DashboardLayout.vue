@@ -7,6 +7,7 @@
         <sidebar-link to="/history" name="Submission History" icon="ti-view-list-alt"/>
         <sidebar-link to="/submission" name="Submission Detail" icon="ti-info-alt"/>
         <sidebar-link to="/auth/login" name="Log In" icon="ti-check"/>
+        <sidebar-link to="/help" name="Help" icon="ti-check"/>
       </template>
     </side-bar>
     <div class="main-panel">

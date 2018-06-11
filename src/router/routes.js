@@ -12,6 +12,7 @@ import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import SubmissionHistory from "@/pages/SubmissionHistory.vue";
 import SubmissionDetail from "@/pages/SubmissionDetail.vue";
+import HelpPage from "@/pages/HelpPage.vue";
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
         path: "submission",
         name: "Submission Detail",
         component: SubmissionDetail
+      },
+      {
+        path: "help",
+        name: "Help",
+        component: HelpPage
       }
     ]
   },

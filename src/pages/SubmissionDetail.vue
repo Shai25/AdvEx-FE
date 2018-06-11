@@ -1,17 +1,44 @@
 <template>
  <div class="row">
+  <div class="col-md-6">
+    <card>
+      <p>Robustness Score  <button>View Details</button></p><hr>
+
+      <h2 style="text-align:center">{{robustness}}</h2>
+      
+      
+    </card>
+  </div>
+  <div class="col-md-6">
+    <card>
+      <p>Rating</p><hr>
+      <h2 style="text-align:center">{{rating}}</h2>
+    </card>
+  </div>
   <div class="col-md-12">
     <card>
-      <h1>{{robustness}}</h1>
-      <h2>{{rating}}</h2>
-      <p>{{suggestion}}</p>
+      <p>Suggestions</p><hr>
+      <p style="font-size:20px;font-weight:bold">{{suggestion}}</p>
     </card>
   </div>
  </div>
+
+
+ 
 </template>
 
 <script>
+import axios from 'axios';
+import { PaperTable } from "@/components";
+
+const columnNames = ["Attack_method", "Accuracy", "Confidence"];
+const columnKeys = ["attack_method", "accuracy", "confidence"];
+
 export default {
+  components: {
+    PaperTable
+  },
+
   data() {
     return {
       "robustness": "9",
