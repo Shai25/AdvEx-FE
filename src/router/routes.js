@@ -58,7 +58,7 @@ const routes = [
       },
       {
         path: "help",
-        name: "Help",
+        name: "AdvEx Help",
         component: HelpPage
       }
     ]
