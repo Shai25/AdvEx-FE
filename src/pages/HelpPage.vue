@@ -1,28 +1,21 @@
 <template>
-    <div class="row">
+  <div class="row">
+    <div class="col-12">
+      <card>
+        <h2>What You Need to Upload</h2><hr>
+        <p style="line-height:20px">You need to upload 2 files:</p>
+        <p style="text-indent:2em">1. Your Image Classification model (trained on Keras) to be evaluated.</p>
+        <p style="text-indent:2em">2. A JSON file that has a mapping of your classes to the ImageNet classes.</p>
+        <p style="line-height:20px">The dataset that we’ll be using for evaluating your model is the ImageNet dataset. This leads to several restrictions about the models our website can accept.</p>
+        <p style="text-indent:2em">＊ We can only evaluate models that are trained using ImageNet dataset.</p>
+        <p style="text-indent:2em">＊ We will need additional details about your model. Given below is a description of what you need to provide us with.</p>
+        <p style="line-height:20px">Each of the classes in ImageNet have a unique class ID. For example, n01443537 is the ID of goldfish. Thus, along with your model, you need to also upload a JSON file that contains the mapping between your output index and the ImageNet unique class ID. You can find an sample JSON file <a href="https://s3.amazonaws.com/advex/index.json">here</a>.</p>
+        <p>The key here should be the class index and the value should be the ImageNet unique class ID.</p>
+      </card>
+    </div>
       <div class="col-12">
         <card>
-          <h1>What You Need to Upload</h1><hr>
-          <p style="line-height:20px">You need to upload 2 files:</p>
-          <p style="text-indent:2em">1. Your Image Classification model (trained on Keras) to be evaluated.</p>
-          <p style="text-indent:2em">2. A JSON file that has a mapping of your classes to the ImageNet classes.</p>
-          <p style="line-height:20px">The dataset that we’ll be using for evaluating your model is the ImageNet dataset. This leads to several restrictions about the models our website can accept.</p>
-          <p style="text-indent:2em">＊ We can only evaluate models that are trained using ImageNet dataset.</p>
-          <p style="text-indent:2em">＊ We will need additional details about your model. Given below is a description of what you need to provide us with.</p>
-          <p style="line-height:20px">Each of the classes in ImageNet have a unique class ID. For example, n01443537 is the ID of goldfish. Thus, along with your model, you need to also upload a JSON file that contains the mapping between your output index and the ImageNet unique class ID. An example of this will be:</p>
-          <p><font face="verdana" size="2" color="darkslateblue">
-          {"0": "n01440764",</br>
-              "1": "n01443537", </br>
-              "2":  "n01484850", </br>
-              "3":  "n01491361", </br>
-              "4":  "n01494475", </br>
-              "5":  "n01496331" }</font></p>
-          <p>The key here should be the class index and the value should be the ImageNet unique class ID.</p>
-        </card>
-      </div>
-      <div class="col-12">
-        <card>
-          <h1>Attacks Performed On Your Model</h1><hr>
+          <h2>Attacks Performed On Your Model</h2><hr>
           <p style="line-height:20px">After a thorough literature review of the attack methods of the Cleverhans library, the following attack methods have been chosen to check the robustness of your model.</p>
           <p style="text-indent:2em">＊ FastGradientMethod</p>
           <p style="text-indent:2em">＊ BasicIterativeMethod</p>
