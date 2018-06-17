@@ -1,7 +1,7 @@
 <template>
   <div class="signup">
     <h2>Sign Up</h2>
-    <form @submit.prevent>
+    <form @submit.prevent="signup">
       <div class="form-group">
         <div class="input-group">
           <label class="control-label col-sm-4" for="name">Name</label><i class="bar"></i>
@@ -35,9 +35,41 @@
 </template>
 
 <script>
-  export default {
-    name: 'signup'
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+
+  methods: {
+    signup: function() {
+      // TODO: get API from config
+      axios.post('https://private-8bf72-advex.apiary-mock.com/users',
+        {
+          'email': this.email,
+          'nickname': this.name,
+          'password': this.password
+        },
+        {
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      )
+      .then(response => {
+        console.log(response)
+        if (response.status == 200) {
+          // alert('success')
+          this.$router.push('/')
+        }
+      })
+      .catch(e => {})
+    }
   }
+}
 </script>
 
 <style lang="scss">
