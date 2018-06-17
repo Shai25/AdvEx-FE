@@ -6,6 +6,7 @@
           {{title}}
         </slot>
       </h4>
+      <hr>
       <p class="card-category">
         <slot name="subTitle">
           {{subTitle}}
@@ -14,7 +15,7 @@
     </template>
     <div>
       <div :id="chartId" class="ct-chart"></div>
-      <div class="footer">
+      <!-- <div class="footer">
         <div class="chart-legend">
           <slot name="legend"></slot>
         </div>
@@ -24,7 +25,7 @@
         </div>
         <div class="pull-right">
         </div>
-      </div>
+      </div> -->
     </div>
 
   </card>

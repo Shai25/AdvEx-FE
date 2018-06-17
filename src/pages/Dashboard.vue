@@ -30,25 +30,7 @@
     </div>
 
     <!--Charts-->
-    <div class="row">
 
-      <div class="col-12">
-        <chart-card title="Degraded Accuracy"
-                    chart-type="Bar"
-                    :chart-data="scoreChart.data"
-                    :chart-options="scoreChart.options">
-          <span slot="footer">
-            <!-- <i class="ti-reload"></i> Updated 3 minutes ago -->
-          </span>
-          <!-- <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Click
-            <i class="fa fa-circle text-warning"></i> Click Second Time
-          </div> -->
-        </chart-card>
-      </div>
-
-    </div>
 
   </div>
 </template>
@@ -61,7 +43,6 @@ import Chartist from 'chartist';
 export default {
   components: {
     StatsCard,
-    ChartCard,
     Dropzone
   },
   /**
@@ -102,30 +83,7 @@ export default {
           footerText: "Updated now",
           footerIcon: "ti-reload"
         }
-      ],
-      scoreChart: {
-        data: {
-          labels: [
-            "FGSM", "Basic Iterative Method", "Carlini Wagner", "Momentum Iterative Method", "DeepFool"
-          ],
-          series: [
-            [80.05, 91.1, 94.1, 94.1, 90.1]
-          ]
-        },
-        options: {
-          seriesBarDistance: 10,
-          axisX: {
-            offset: 60
-          },
-          axisY: {
-            offset: 80,
-            labelInterpolationFnc: function(value) {
-              return value + '%'
-            },
-            scaleMinSpace: 15
-          }
-        }
-      }
+      ]
     };
   }
 };

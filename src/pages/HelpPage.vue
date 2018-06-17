@@ -31,15 +31,15 @@
           <p style="text-indent:2em">＊ MadryEtAl</p>
           <p style="line-height:20px">A brief decription of each of the attack methods and a link to their published papers have been given below.</p>
           <p style="line-height:20px"><b>FastGradientMethod</b></p>
-          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1412.6572.pdf">https://arxiv.org/pdf/1412.6572.pdf</a> This is the basic algorithm for generating adversarial examples. It is also called the FastGradientSignMethod.</p>
+          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1412.6572.pdf"> https://arxiv.org/pdf/1412.6572.pdf</a> This is the basic algorithm for generating adversarial examples. It is also called the FastGradientSignMethod.</p>
           <p style="line-height:20px"><b>BasicIterativeMethod</b></p>
-          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1607.02533.pdf">https://arxiv.org/pdf/1607.02533.pdf</a>It is an extension of the FastGradientMethod in the sense that it is applied multiple times with small step size, and pixel values of intermediate results are clipped after each step to ensure that they are in an ε-neighbourhood of the original image.</p>
+          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1607.02533.pdf"> https://arxiv.org/pdf/1607.02533.pdf</a>It is an extension of the FastGradientMethod in the sense that it is applied multiple times with small step size, and pixel values of intermediate results are clipped after each step to ensure that they are in an ε-neighbourhood of the original image.</p>
           <p style="line-height:20px"><b>CarliniWagnerL2</b></p>
-          <p style="line-height:20px">Link: <a href="https://arxiv.org/abs/1608.04644.pdf">https://arxiv.org/abs/1608.04644.pdf</a>It is an iterative attack that finds adversarial examples on many defenses that are robust to other attacks.</p>
+          <p style="line-height:20px">Link: <a href="https://arxiv.org/abs/1608.04644.pdf"> https://arxiv.org/abs/1608.04644.pdf</a>It is an iterative attack that finds adversarial examples on many defenses that are robust to other attacks.</p>
           <p style="line-height:20px"><b>MomentumIterativeMethod</b></p>
-          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1710.06081.pdf">https://arxiv.org/pdf/1710.06081.pdf</a>By integrating the momentum term into the iterative process for attacks, this attack method can stabilize update directions and escape from poor local maxima during the iterations, resulting in more transferable adversarial examples.</p>
+          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1710.06081.pdf"> https://arxiv.org/pdf/1710.06081.pdf</a>By integrating the momentum term into the iterative process for attacks, this attack method can stabilize update directions and escape from poor local maxima during the iterations, resulting in more transferable adversarial examples.</p>
           <p style="line-height:20px"><b>MadryEtAl</b></p>
-          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1706.06083.pdf">https://arxiv.org/pdf/1706.06083.pdf</a>This performs the Projected Gradient Descent Algorithm to attack the model.A description of the parameters of each of these attack methods can be found here.</p>
+          <p style="line-height:20px">Link: <a href="https://arxiv.org/pdf/1706.06083.pdf"> https://arxiv.org/pdf/1706.06083.pdf</a>This performs the Projected Gradient Descent Algorithm to attack the model.A description of the parameters of each of these attack methods can be found here.</p>
 
          </p>
 
