@@ -13,6 +13,8 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "chartist": "^0.11.0",
+    "chartist-plugin-targetline": "^1.0.1",
+    "chartist-plugin-tooltip": "0.0.11",
     "dropzone": "^5.4.0",
     "es6-promise": "^4.2.4",
     "vue": "^2.5.13",

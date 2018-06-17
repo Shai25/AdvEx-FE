@@ -1,167 +1,157 @@
 <template>
- <div class="row">
-  <div class="col-md-12">
-    <card>
-      <template slot="header">
-        <h4 class="card-title">Paper Dashboard Headings</h4>
-        <p class="card-category">Created using
-          <a href="https://www.google.com/fonts/specimen/Muli">Muli</a> Font Family</p>
-      </template>
-      <div class="content">
-        <div class="typo-line">
-          <h1>
-            <p class="category">Header 1</p>Paper Dashboard Heading </h1>
-        </div>
-        <div class="typo-line">
-          <h2>
-            <p class="category">Header 2</p>Paper Dashboard Heading </h2>
-        </div>
-        <div class="typo-line">
-          <h3>
-            <p class="category">Header 3</p>Paper Dashboard Heading </h3>
-        </div>
-        <div class="typo-line">
-          <h4>
-            <p class="category">Header 4</p>Paper Dashboard Heading </h4>
-        </div>
-        <div class="typo-line">
-          <h5>
-            <p class="category">Header 5</p>Paper Dashboard Heading </h5>
-        </div>
-        <div class="typo-line">
-          <h6>
-            <p class="category">Header 6</p>Paper Dashboard Heading </h6>
-        </div>
-        <div class="typo-line">
-          <p>
-            <span class="category">Paragraph</span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
-          </p>
-        </div>
-        <div class="typo-line">
-          <p class="category">Quote</p>
-          <blockquote>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
-            </p>
-            <small>
-              Steve Jobs, CEO Apple
-            </small>
-          </blockquote>
-        </div>
-        <div class="typo-line">
-          <p class="category">Muted Text</p>
-          <p class="text-muted">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
-          </p>
-        </div>
-        <div class="typo-line">
-          <!--
-               there are also "text-info", "text-success", "text-warning", "text-danger" clases for the text
-               -->
-          <p class="category">Coloured Text</p>
-          <p class="text-primary">
-            Text Primary - Light Bootstrap Table Heading and complex bootstrap dashboard you've ever seen on the internet.
-          </p>
-          <p class="text-info">
-            Text Info - Light Bootstrap Table Heading and complex bootstrap dashboard you've ever seen on the internet.
-          </p>
-          <p class="text-success">
-            Text Success - Light Bootstrap Table Heading and complex bootstrap dashboard you've ever seen on the internet.
-          </p>
-          <p class="text-warning">
-            Text Warning - Light Bootstrap Table Heading and complex bootstrap dashboard you've ever seen on the internet.
-          </p>
-          <p class="text-danger">
-            Text Danger - Light Bootstrap Table Heading and complex bootstrap dashboard you've ever seen on the internet.
-          </p>
-        </div>
-        <div class="typo-line">
-          <h2>
-            <p class="category">Small Tag</p>Header with small subtitle
-            <br>
-            <small>".small" is a tag for the headers</small>
-          </h2>
-        </div>
-        <div class="typo-line">
-          <p class="category">Lists</p>
-          <div class="row">
-            <div class="col-md-3">
-              <h5>Unordered List</h5>
-              <ul>
-                <li>List Item</li>
-                <li>List Item</li>
-                <li class="list-unstyled">
-                  <ul>
-                    <li>List Item</li>
-                    <li>List Item</li>
-                    <li>List Item</li>
-                  </ul>
-                </li>
-                <li>List Item</li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <h5>Ordered List</h5>
-              <ol>
-                <li>List Item</li>
-                <li>List Item</li>
-                <li>List Item</li>
-              </ol>
-            </div>
-            <div class="col-md-3">
-              <h5>Unstyled List</h5>
-              <ul class="list-unstyled">
-                <li>List Item</li>
-                <li>List Item</li>
-                <li>List Item</li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <h5>Inline List</h5>
-              <ul class="list-inline">
-                <li>List Item</li>
-                <li>List Item</li>
-                <li>List Item</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="typo-line">
-          <p class="category">Blockquotes</p>
-          <div class="row">
-            <div class="col-md-6">
-              <h5>Default Blockquote</h5>
-              <blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-              </blockquote>
-            </div>
-            <div class="col-md-6">
-              <h5>Blockquote with Citation</h5>
-              <blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <small>Someone famous in
-                  <cite title="Source Title">Source Title</cite>
-                </small>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-        <div class="typo-line">
-          <p class="category">Code</p>
-          <p>
-            This is
-            <code>.css-class-as-code</code>, an example of an inline code element. Wrap inline code within a
-            <code>
-              &lt;code&gt;...&lt;/code&gt;</code>tag.</p>
-          <pre>1. #This is an example of preformatted text. 2. #Here is another line of code</pre>
-        </div>
+  <div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <card>
+          <h4 class="card-title">Robustness Score</h4><hr>
+          <h2 style="text-align:center">{{data.robustness}}</h2>
+        </card>
       </div>
-    </card>
+      
+      <div class="col-md-6">
+        <card>
+          <h4 class="card-title">Rating</h4><hr>
+          <h2 style="text-align:center">{{data.rating}}</h2>
+        </card>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <card>
+          <h4 class="card-title">Details</h4><hr>
+          <div slot="raw-content" class="table-responsive">
+            <table class="table">
+              <thead>
+                <th v-for="column in tableHeaders">{{column}}</th>
+              </thead>
+              <tr>
+                <td v-for="column in tableAccuracies">{{column}}</td>
+              </tr>
+              <tr>
+                <td v-for="column in tableConfidences">{{column}}</td>
+              </tr>
+            </table>
+          </div>
+        </card>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <chart-card title="Accuracy Plot"
+                    chart-type="Bar"
+                    :chart-data="chartData.data"
+                    :chart-options="chartData.options">
+        </chart-card>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <card>
+          <h4 class="card-title">Suggestion</h4><hr>
+          <p style="font-size:20px">{{data.suggestion}}</p>
+        </card>
+      </div>
+    </div>
+
   </div>
- </div>
 </template>
+
 <script>
-export default {};
+import axios from 'axios';
+import { ChartCard } from "@/components/index";
+import Chartist from 'chartist';
+
+export default {
+  components: {
+    ChartCard,
+  },
+
+  data() {
+    return {
+      tableHeaders: ["Method", "Original"],
+      tableAccuracies: ["Accuracy"],
+      tableConfidences: ["Confidence"],
+
+      data: {
+        "robustness": "9",
+        "rating": "Good",
+        "details": {
+          "original_accuracy": "98.55%",
+          "attack_results": [
+            {
+              "attack_method": "FGSM",
+              "accuracy": "80.05%",
+              "confidence": "95%"
+            },
+            {
+              "attack_method": "Basic Iterative Method",
+              "accuracy": "92.10%",
+              "confidence": "91%"
+            },
+            {
+              "attack_method": "Carlini Wagner",
+              "accuracy": "94.10%",
+              "confidence": "93%"
+            },
+            {
+              "attack_method": "Momentum Iterative Method",
+              "accuracy": "94.10%",
+              "confidence": "93.7%"
+            },
+            {
+              "attack_method": "DeepFool",
+              "accuracy": "90.10%",
+              "confidence": "89%"
+            }
+          ]
+        },
+        "suggestion": "Your model can be made more robust by training it with some of the adversarial examples which you can download for free from your dashboard."
+      },
+
+      chartData: {
+        data: {
+          labels: [],
+          series: []
+        },
+        options: {
+          seriesBarDistance: 10,
+          axisX: {
+            offset: 60
+          },
+          axisY: {
+            offset: 80,
+            labelInterpolationFnc: function(value) {
+              return value + '%'
+            },
+            scaleMinSpace: 15
+          }
+        }
+      }
+    }
+  },
+
+  created() {
+    var attack_methods = this.data.details.attack_results.map(x => x.attack_method)
+    this.tableHeaders = this.tableHeaders.concat(attack_methods)
+
+    var accuracies = this.data.details.attack_results.map(x => x.accuracy)
+    this.tableAccuracies.push(this.data.details.original_accuracy)
+    this.tableAccuracies = this.tableAccuracies.concat(accuracies)
+
+    this.tableConfidences.push("/")
+    this.tableConfidences = this.tableConfidences.concat(this.data.details.attack_results.map(x => x.confidence))
+
+    this.chartData.data.labels = attack_methods
+    this.chartData.data.series = [accuracies.map(x => parseFloat(x))]
+  }
+
+};
 </script>
+
 <style>
 </style>
