@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div class="row">
+      <div class="col-md-12">
+        <card>
+          <h4 class="card-title">Submission # {{$route.params.id}}</h4><hr>
+          <p>Model Name: {{model_name}}</p>
+          <p>Status: {{status}}</p>
+          <p>Submitted At: {{submitted_at}}</p>
+        </card>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-6">
@@ -73,6 +83,10 @@ export default {
 
   data() {
     return {
+      model_name: "VGG-16 v1.0",
+      status: "Finished",
+      submitted_at: "2018-05-01 08:40:51",
+
       tableHeaders: ["Method", "Original"],
       tableAccuracies: ["Accuracy"],
       tableConfidences: ["Confidence"],
@@ -104,13 +118,13 @@ export default {
               "confidence": "93.7%"
             },
             {
-              "attack_method": "DeepFool",
+              "attack_method": "MadryEtAl",
               "accuracy": "90.10%",
               "confidence": "89%"
             }
           ]
         },
-        "suggestion": "Your model can be made more robust by training it with some of the adversarial examples which you can download for free from your dashboard."
+        "suggestion": "Your model can be made more robust by training it with some of the adversarial examples."
       },
 
       chartData: {

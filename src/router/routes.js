@@ -52,7 +52,7 @@ const routes = [
         component: SubmissionHistory
       },
       {
-        path: "submission",
+        path: "submission/:id",
         name: "Submission Detail",
         component: SubmissionDetail
       },
