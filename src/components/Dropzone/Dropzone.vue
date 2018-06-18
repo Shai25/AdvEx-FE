@@ -72,7 +72,19 @@ export default {
 
   methods: {
     onSubmit() {
-      this.submit(this.model_name);
+      var ext0 = this.dropzone.files[0].name.split('.').pop();
+      var ext1 = this.dropzone.files[1].name.split('.').pop();
+      if (ext0 == 'h5' && ext1 == 'h5' || ext0 == 'json' && ext1 == 'json') {
+        alert('Please make sure that exactly one model and exactly one index are selected.');
+      }
+      else {
+        console.log('Start uploading');
+        alert('Files are not actually uploaded because this is a demo.');
+        // setTimeout(() => this.dropzone.processFile(this.dropzone.files[0]));
+        // setTimeout(() => this.dropzone.processFile(this.dropzone.files[1]));
+        console.log('Before submit');
+        this.submit(this.model_name);
+      }
     }
   },
 

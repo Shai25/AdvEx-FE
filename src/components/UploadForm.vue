@@ -26,8 +26,7 @@ export default {
 
   methods: {
     submit: function(model_name) {
-      console.log(model_name)
-      // this.$router.push('/history');
+      this.$router.push('/history');
       // TODO: get API from config
       // axios.post('https://private-8bf72-advex.apiary-mock.com/users',
       //   {
