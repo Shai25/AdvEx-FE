@@ -1,9 +1,54 @@
+<style>
+  .dropzone {
+    /* BFC */
+    overflow: hidden;
+  }
+  .dz-default.dz-message {
+    /* hide default msg */
+    display: none;
+  }
+  .dz-preview {
+    float: left;
+  }
+  .upload-msg {
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #ccc;
+    pointer-events: none;
+  }
+  .upload-form {
+    margin: 0 16px;
+    height: 150px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  #model_name {
+    padding: 9px;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    border: 1px solid #cecece;
+    cursor: text;
+  }
+</style>
+
 <template>
-  <form class="dropzone" v-bind:class="{ 'dz-max-files-reached' : isFull }">
-    <!-- Not displayed, just for Dropzone's `dictDefaultMessage` option -->
-    <div id="dropzone-message" style="display: none">
-      <span class="dropzone-title">Upload your model (.h5) and index (.json) files.</span>
-      <!-- <span class="dropzone-info">You can upload multiple files at once</span> -->
+  <form class="dropzone">
+    <div class="upload-msg" v-bind:style="{
+      display: fileCnt !== 2 ? 'inline-block' : 'none',
+      margin: fileCnt === 0 ? 0 : '0 32px',
+      width: fileCnt === 0 ? '100%' : 'initial',
+    }">
+      Upload your model (.h5) and index (.json) files.
+    </div>
+    <div class="upload-form" v-bind:style="{
+      display: fileCnt === 2 ? 'inline-flex' : 'none',
+    }">
+      <input type="text" id="model_name" required="required" placeholder="Model Name" v-model="model_name"/>
+      <button class="btn btn-primary" v-on:click="onSubmit">Submit</button>
     </div>
   </form>
 </template>
@@ -16,10 +61,18 @@ Dropzone.autoDiscover = false;
 
 export default {
   name: 'dropzone',
+  props: ['submit'],
 
   data () {
     return {
-      isFull: false
+      fileCnt: 0,
+      model_name: ''
+    }
+  },
+
+  methods: {
+    onSubmit() {
+      this.submit(this.model_name);
     }
   },
 
@@ -44,8 +97,6 @@ export default {
       // Content-Type should be included, otherwise you'll get a signature
       // mismatch error from S3. We're going to update this for each file.
       header: '',
-      // Customize the wording
-      dictDefaultMessage: document.querySelector('#dropzone-message').innerHTML,
       // We're going to process each file manually (see `accept` below)
       autoProcessQueue: true,
       // Limit file extension (comma-separated list as string)
@@ -54,15 +105,15 @@ export default {
       addRemoveLinks: true,
       // Limit # of files uploadable      
       maxFiles: 2,
+
+      clickable: vm.fileCnt < 2,
       
       init () {
         this.hiddenFileInput.removeAttribute('multiple');
 
         // Listener for removing files
         this.on('removedfile', (file) => {
-          if (this.files.length < 2) {
-            this.isFull = false;
-          }
+          vm.fileCnt = this.files.length;
         });
       },
       // Here we request a signed upload URL when a file being accepted
@@ -70,11 +121,7 @@ export default {
         console.log(file);
         console.log(file.upload.uuid);
 
-        if (this.files.length == 2) {
-          this.isFull = true;
-        }
-        console.log(this);
-        console.log(this.isFull);
+        vm.fileCnt = this.files.length;
 
         lambda.getSignedURL(file)
           .then((url) => {
