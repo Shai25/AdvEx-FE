@@ -7,7 +7,7 @@
         <sidebar-link to="/history" name="Submission History" icon="ti-view-list-alt"/>
         <sidebar-link to="/submission/1" name="Submission Detail" icon="ti-info-alt"/>
         <sidebar-link to="/help" name="Help Page" icon="ti-help-alt"/>
-        <sidebar-link to="/auth/login" name="Log In" icon="ti-check"/>
+        <sidebar-link to="/logout" name="Log Out" icon="ti-arrow-left"/>
       </template>
     </side-bar>
     <div class="main-panel">
@@ -21,13 +21,16 @@
     </div>
   </div>
 </template>
+
 <style lang="scss">
 </style>
+
 <script>
 import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "./MobileMenu";
+
 export default {
   components: {
     TopNavbar,
@@ -35,12 +38,20 @@ export default {
     DashboardContent,
     MobileMenu
   },
+
   methods: {
     toggleSidebar() {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false);
       }
     }
+  },
+
+  beforeCreate: function () {
+    if (!this.$session.exists()) {
+      this.$router.push('/auth/login');
+    }
   }
+
 };
 </script>

@@ -13,6 +13,7 @@ import UserProfile from "@/pages/UserProfile.vue";
 import SubmissionHistory from "@/pages/SubmissionHistory.vue";
 import SubmissionDetail from "@/pages/SubmissionDetail.vue";
 import HelpPage from "@/pages/HelpPage.vue";
+import LogOut from "@/pages/LogOut.vue";
 
 const routes = [
   {
@@ -41,11 +42,11 @@ const routes = [
         name: "Dashboard",
         component: Dashboard
       },
-      {
-        path: "profile",
-        name: "User Profile",
-        component: UserProfile
-      },
+      // {
+      //   path: "profile",
+      //   name: "User Profile",
+      //   component: UserProfile
+      // },
       {
         path: "history",
         name: "Submission History",
@@ -60,6 +61,11 @@ const routes = [
         path: "help",
         name: "Help Page",
         component: HelpPage
+      },
+      {
+        path: "logout",
+        name: "Log Out",
+        component: LogOut
       }
     ]
   },
