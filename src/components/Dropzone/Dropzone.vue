@@ -42,6 +42,8 @@ export default {
       dictDefaultMessage: document.querySelector('#dropzone-message').innerHTML,
       // We're going to process each file manually (see `accept` below)
       autoProcessQueue: false,
+      // Limit file extension (comma-separated list as string)
+      acceptedFiles: ".h5,.json",
       // Here we request a signed upload URL when a file being accepted
       accept (file, done) {
         lambda.getSignedURL(file)
