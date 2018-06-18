@@ -19,15 +19,9 @@
       </div>
     </div>
 
-    <!--Dropzone-->
-    <div class="row">
-      <div class="col-md-12">
-        <card>
-          <dropzone>
-          </dropzone>
-        </card>
-      </div>
-    </div>
+    <!--Upload Form-->
+    <upload-form>
+    </upload-form>
 
     <!--Charts-->
 
@@ -37,13 +31,13 @@
 
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
-import Dropzone from '@/components/Dropzone/Dropzone';
+import UploadForm from '@/components/UploadForm';
 import Chartist from 'chartist';
 
 export default {
   components: {
+    UploadForm,
     StatsCard,
-    Dropzone
   },
   /**
    * Chart data used to render stats, charts. Should be replaced with server data

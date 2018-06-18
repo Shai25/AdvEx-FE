@@ -1,21 +1,27 @@
 <template>
-  <form class="dropzone">
+  <form class="dropzone" v-bind:class="{ 'dz-max-files-reached' : isFull }">
     <!-- Not displayed, just for Dropzone's `dictDefaultMessage` option -->
     <div id="dropzone-message" style="display: none">
-      <span class="dropzone-title">Drop files here or click to select</span>
-      <span class="dropzone-info">You can upload multiple files at once</span>
+      <span class="dropzone-title">Upload your model (.h5) and index (.json) files.</span>
+      <!-- <span class="dropzone-info">You can upload multiple files at once</span> -->
     </div>
   </form>
 </template>
 
 <script>
-import Dropzone from 'dropzone'
-import '../../../node_modules/dropzone/dist/dropzone.css'
-import lambda from './lambda'
-Dropzone.autoDiscover = false
+import lambda from './lambda';
+import Dropzone from 'dropzone';
+import '../../../node_modules/dropzone/dist/dropzone.css';
+Dropzone.autoDiscover = false;
 
 export default {
   name: 'dropzone',
+
+  data () {
+    return {
+      isFull: false
+    }
+  },
 
   mounted () {
     const vm = this
@@ -29,7 +35,7 @@ export default {
       sending (file, xhr) {
         let _send = xhr.send
         xhr.send = () => {
-          _send.call(xhr, file)
+          _send.call(xhr, file);
         }
       },
       // Upload one file at a time since we're using the S3 pre-signed URL scenario
@@ -41,17 +47,41 @@ export default {
       // Customize the wording
       dictDefaultMessage: document.querySelector('#dropzone-message').innerHTML,
       // We're going to process each file manually (see `accept` below)
-      autoProcessQueue: false,
+      autoProcessQueue: true,
       // Limit file extension (comma-separated list as string)
       acceptedFiles: ".h5,.json",
+      // Show remove buttons
+      addRemoveLinks: true,
+      // Limit # of files uploadable      
+      maxFiles: 2,
+      
+      init () {
+        this.hiddenFileInput.removeAttribute('multiple');
+
+        // Listener for removing files
+        this.on('removedfile', (file) => {
+          if (this.files.length < 2) {
+            this.isFull = false;
+          }
+        });
+      },
       // Here we request a signed upload URL when a file being accepted
       accept (file, done) {
+        console.log(file);
+        console.log(file.upload.uuid);
+
+        if (this.files.length == 2) {
+          this.isFull = true;
+        }
+        console.log(this);
+        console.log(this.isFull);
+
         lambda.getSignedURL(file)
           .then((url) => {
-            file.uploadURL = url
-            done()
+            file.uploadURL = url;
+            // done()
             // Manually process each file
-            setTimeout(() => vm.dropzone.processFile(file))
+            // setTimeout(() => vm.dropzone.processFile(file))
           })
           .catch((err) => {
             done('Failed to get an S3 signed upload URL', err)
@@ -60,9 +90,8 @@ export default {
     }
     // Instantiate Dropzone
     this.dropzone = new Dropzone(this.$el, options)
-    // Set signed upload URL for each file
     vm.dropzone.on('processing', (file) => {
-      vm.dropzone.options.url = file.uploadURL
+      vm.dropzone.options.url = file.uploadURL;
     })
   }
 
@@ -97,13 +126,18 @@ form.dropzone .dz-message span {
 }
 
 form.dropzone .dz-message span span.dropzone-title {
-   display: block;
-   color: #888;
-   font-size: 1.25em;
+  display: block;
+  color: #888;
+  font-size: 1.25em;
 }
 
 form.dropzone .dz-message span span.dropzone-info {
-   display: block;
-   color: #a8a8a8;
+  display: block;
+  color: #a8a8a8;
+}
+
+form.dz-max-files-reached {
+  pointer-events: none;
+  cursor: default;
 }
 </style>
