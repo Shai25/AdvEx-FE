@@ -53,8 +53,11 @@ export default {
       .then(response => {
         console.log(response)
         if (response.status == 200) {
-          // alert('success')
-          this.$router.push('/')
+          this.$session.start();
+          this.$session.set('token', response.data.token);
+          this.$session.set('user_id', response.data.user_id);
+          axios.defaults.headers.common['Authorization'] = 'Basic ' + response.data.user_id + ':' + response.data.token;
+          this.$router.push('/');
         }
       })
       .catch(e => {})

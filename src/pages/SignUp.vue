@@ -62,8 +62,7 @@ export default {
       .then(response => {
         console.log(response)
         if (response.status == 200) {
-          // alert('success')
-          this.$router.push('/')
+          this.$router.push('/auth/login')
         }
       })
       .catch(e => {})
