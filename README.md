@@ -24,4 +24,6 @@ npm run build
 
 ### Deploy to GitHub Pages
 
+```
 push-dir --dir=dist --branch=gh-pages
+```
