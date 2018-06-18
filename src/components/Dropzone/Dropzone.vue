@@ -1,21 +1,92 @@
+<style>
+  .dropzone {
+    /* BFC */
+    overflow: hidden;
+  }
+  .dz-default.dz-message {
+    /* hide default msg */
+    display: none;
+  }
+  .dz-preview {
+    float: left;
+  }
+  .upload-msg {
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #ccc;
+    pointer-events: none;
+  }
+  .upload-form {
+    margin: 0 16px;
+    height: 150px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  #model_name {
+    padding: 9px;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    border: 1px solid #cecece;
+    cursor: text;
+  }
+</style>
+
 <template>
   <form class="dropzone">
-    <!-- Not displayed, just for Dropzone's `dictDefaultMessage` option -->
-    <div id="dropzone-message" style="display: none">
-      <span class="dropzone-title">Drop files here or click to select</span>
-      <span class="dropzone-info">You can upload multiple files at once</span>
+    <div class="upload-msg" v-bind:style="{
+      display: fileCnt !== 2 ? 'inline-block' : 'none',
+      margin: fileCnt === 0 ? 0 : '0 32px',
+      width: fileCnt === 0 ? '100%' : 'initial',
+    }">
+      Upload your model (.h5) and index (.json) files.
+    </div>
+    <div class="upload-form" v-bind:style="{
+      display: fileCnt === 2 ? 'inline-flex' : 'none',
+    }">
+      <input type="text" id="model_name" required="required" placeholder="Model Name" v-model="model_name"/>
+      <button class="btn btn-primary" v-on:click="onSubmit">Submit</button>
     </div>
   </form>
 </template>
 
 <script>
-import Dropzone from 'dropzone'
-import '../../../node_modules/dropzone/dist/dropzone.css'
-import lambda from './lambda'
-Dropzone.autoDiscover = false
+import lambda from './lambda';
+import Dropzone from 'dropzone';
+import '../../../node_modules/dropzone/dist/dropzone.css';
+Dropzone.autoDiscover = false;
 
 export default {
   name: 'dropzone',
+  props: ['submit'],
+
+  data () {
+    return {
+      fileCnt: 0,
+      model_name: ''
+    }
+  },
+
+  methods: {
+    onSubmit() {
+      var ext0 = this.dropzone.files[0].name.split('.').pop();
+      var ext1 = this.dropzone.files[1].name.split('.').pop();
+      if (ext0 == 'h5' && ext1 == 'h5' || ext0 == 'json' && ext1 == 'json') {
+        alert('Please make sure that exactly one model and exactly one index are selected.');
+      }
+      else {
+        console.log('Start uploading');
+        alert('Files are not actually uploaded because this is a demo.');
+        // setTimeout(() => this.dropzone.processFile(this.dropzone.files[0]));
+        // setTimeout(() => this.dropzone.processFile(this.dropzone.files[1]));
+        console.log('Before submit');
+        this.submit(this.model_name);
+      }
+    }
+  },
 
   mounted () {
     const vm = this
@@ -29,7 +100,7 @@ export default {
       sending (file, xhr) {
         let _send = xhr.send
         xhr.send = () => {
-          _send.call(xhr, file)
+          _send.call(xhr, file);
         }
       },
       // Upload one file at a time since we're using the S3 pre-signed URL scenario
@@ -38,18 +109,38 @@ export default {
       // Content-Type should be included, otherwise you'll get a signature
       // mismatch error from S3. We're going to update this for each file.
       header: '',
-      // Customize the wording
-      dictDefaultMessage: document.querySelector('#dropzone-message').innerHTML,
       // We're going to process each file manually (see `accept` below)
-      autoProcessQueue: false,
+      autoProcessQueue: true,
+      // Limit file extension (comma-separated list as string)
+      acceptedFiles: ".h5,.json",
+      // Show remove buttons
+      addRemoveLinks: true,
+      // Limit # of files uploadable      
+      maxFiles: 2,
+
+      clickable: vm.fileCnt < 2,
+      
+      init () {
+        this.hiddenFileInput.removeAttribute('multiple');
+
+        // Listener for removing files
+        this.on('removedfile', (file) => {
+          vm.fileCnt = this.files.length;
+        });
+      },
       // Here we request a signed upload URL when a file being accepted
       accept (file, done) {
+        console.log(file);
+        console.log(file.upload.uuid);
+
+        vm.fileCnt = this.files.length;
+
         lambda.getSignedURL(file)
           .then((url) => {
-            file.uploadURL = url
-            done()
+            file.uploadURL = url;
+            // done()
             // Manually process each file
-            setTimeout(() => vm.dropzone.processFile(file))
+            // setTimeout(() => vm.dropzone.processFile(file))
           })
           .catch((err) => {
             done('Failed to get an S3 signed upload URL', err)
@@ -58,9 +149,8 @@ export default {
     }
     // Instantiate Dropzone
     this.dropzone = new Dropzone(this.$el, options)
-    // Set signed upload URL for each file
     vm.dropzone.on('processing', (file) => {
-      vm.dropzone.options.url = file.uploadURL
+      vm.dropzone.options.url = file.uploadURL;
     })
   }
 
@@ -95,13 +185,18 @@ form.dropzone .dz-message span {
 }
 
 form.dropzone .dz-message span span.dropzone-title {
-   display: block;
-   color: #888;
-   font-size: 1.25em;
+  display: block;
+  color: #888;
+  font-size: 1.25em;
 }
 
 form.dropzone .dz-message span span.dropzone-info {
-   display: block;
-   color: #a8a8a8;
+  display: block;
+  color: #a8a8a8;
+}
+
+form.dz-max-files-reached {
+  pointer-events: none;
+  cursor: default;
 }
 </style>
