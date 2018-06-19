@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <card>
-        <h2>What You Need to Upload</h2><hr>
+        <h3>What You Need to Upload</h3><hr>
         <p style="line-height:20px">You need to upload 2 files:</p>
         <p style="text-indent:2em">1. Your Image Classification model (trained on Keras) to be evaluated.</p>
         <p style="text-indent:2em">2. A JSON file that has a mapping of your classes to the ImageNet classes.</p>
@@ -17,23 +17,18 @@
     </div>
       <div class="col-12">
         <card>
-          <h2>Attacks Performed On Your Model</h2><hr>
+          <h3>Attacks Performed On Your Model</h3><hr>
           <p style="line-height:20px">After a thorough literature review of the attack methods of the Cleverhans library, the following attack methods have been chosen to check the robustness of your model.</p>
-          <p style="text-indent:2em">＊ <a href="https://arxiv.org/pdf/1412.6572.pdf"> FastGradientMethod</a></p>
-          <p style="text-indent:2em">＊ <a href="https://arxiv.org/pdf/1607.02533.pdf"> BasicIterativeMethod</a></p>
-          <p style="text-indent:2em">＊ <a href="https://arxiv.org/pdf/1710.06081.pdf"> MomentumIterativeMethod</a></p>
-          <p style="text-indent:2em">＊ <a href="https://arxiv.org/abs/1608.04644.pdf"> CarliniWagnerL2</a></p>
-          <p style="text-indent:2em">＊ <a href="https://arxiv.org/pdf/1706.06083.pdf"> MadryEtAl</a></p>
           <p style="line-height:20px">A brief decription of each of the attack methods and a link to their published papers have been given below.</p>
-          <p style="line-height:20px"><b>FastGradientMethod</b></p>
+          <p style="line-height:20px"><b><a href="https://arxiv.org/pdf/1412.6572.pdf"> FastGradientMethod</a></b></p>
           <p style="line-height:20px">This is the basic algorithm for generating adversarial examples. It is also called the FastGradientSignMethod.</p>
-          <p style="line-height:20px"><b>BasicIterativeMethod</b></p>
+          <p style="line-height:20px"><b><a href="https://arxiv.org/pdf/1607.02533.pdf"> BasicIterativeMethod</a></b></p>
           <p style="line-height:20px">It is an extension of the FastGradientMethod in the sense that it is applied multiple times with small step size, and pixel values of intermediate results are clipped after each step to ensure that they are in an ε-neighbourhood of the original image.</p>
-          <p style="line-height:20px"><b>CarliniWagnerL2</b></p>
+          <p style="line-height:20px"><b><a href="https://arxiv.org/abs/1608.04644.pdf"> CarliniWagnerL2</a></b></p>
           <p style="line-height:20px">It is an iterative attack that finds adversarial examples on many defenses that are robust to other attacks.</p>
-          <p style="line-height:20px"><b>MomentumIterativeMethod</b></p>
+          <p style="line-height:20px"><b><a href="https://arxiv.org/pdf/1710.06081.pdf"> MomentumIterativeMethod</a></b></p>
           <p style="line-height:20px">By integrating the momentum term into the iterative process for attacks, this attack method can stabilize update directions and escape from poor local maxima during the iterations, resulting in more transferable adversarial examples.</p>
-          <p style="line-height:20px"><b>MadryEtAl</b></p>
+          <p style="line-height:20px"><b><a href="https://arxiv.org/pdf/1706.06083.pdf"> MadryEtAl</a></b></p>
           <p style="line-height:20px">This performs the Projected Gradient Descent Algorithm to attack the model.A description of the parameters of each of these attack methods can be found here.</p>
 
          </p>
