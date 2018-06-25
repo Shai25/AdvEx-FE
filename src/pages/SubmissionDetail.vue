@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { ChartCard } from "@/components/index";
 import Chartist from 'chartist';
 
@@ -87,43 +86,35 @@ export default {
       status: "Finished",
       submitted_at: "2018-05-01 08:40:51",
 
-      tableHeaders: ["Method", "Original"],
+      tableHeaders: ["Method"],
       tableAccuracies: ["Accuracy"],
       tableConfidences: ["Confidence"],
 
       data: {
-        "robustness": "9",
-        "rating": "Good",
-        "details": {
-          "original_accuracy": "98.55%",
-          "attack_results": [
-            {
-              "attack_method": "FGSM",
-              "accuracy": "80.05%",
-              "confidence": "95%"
-            },
-            {
-              "attack_method": "Basic Iterative Method",
-              "accuracy": "92.10%",
-              "confidence": "91%"
-            },
-            {
-              "attack_method": "Carlini Wagner",
-              "accuracy": "94.10%",
-              "confidence": "93%"
-            },
-            {
-              "attack_method": "Momentum Iterative Method",
-              "accuracy": "94.10%",
-              "confidence": "93.7%"
-            },
-            {
-              "attack_method": "MadryEtAl",
-              "accuracy": "90.10%",
-              "confidence": "89%"
-            }
-          ]
-        },
+        "rating": "Good", 
+        "robustness": "9", 
+        "details": [
+          {
+            "attack_method": "CLEAN", 
+            "confidence": "95%", 
+            "accuracy": "80.05%"
+          }, 
+          {
+            "attack_method": "FGSM", 
+            "confidence": "95%", 
+            "accuracy": "80.05%"
+          }, 
+          {
+            "attack_method": "MI-FGSM", 
+            "confidence": "91%", 
+            "accuracy": "92.10%"
+          }, 
+          {
+            "attack_method": "I-FGSM", 
+            "confidence": "93.7%", 
+            "accuracy": "94.10%"
+          }
+        ], 
         "suggestion": "Your model can be made more robust by training it with some of the adversarial examples."
       },
 
@@ -150,15 +141,23 @@ export default {
   },
 
   created() {
-    var attack_methods = this.data.details.attack_results.map(x => x.attack_method)
+    // TODO: get url from config
+    axios.get('http://localhost:5000/submissions/' + this.$route.params.id,
+      { 'headers': { 'Authorization': this.$session.get('token') } })
+    .then(response => {
+      console.log(response)
+      this.data = response.data.submissions;
+    })
+    .catch(e => {})
+
+    var attack_methods = this.data.details.map(x => x.attack_method)
     this.tableHeaders = this.tableHeaders.concat(attack_methods)
 
-    var accuracies = this.data.details.attack_results.map(x => x.accuracy)
-    this.tableAccuracies.push(this.data.details.original_accuracy)
+    var accuracies = this.data.details.map(x => x.accuracy)
     this.tableAccuracies = this.tableAccuracies.concat(accuracies)
 
-    this.tableConfidences.push("/")
-    this.tableConfidences = this.tableConfidences.concat(this.data.details.attack_results.map(x => x.confidence))
+    var confidences = this.data.details.map(x => x.confidence)
+    this.tableConfidences = this.tableConfidences.concat(confidences)
 
     this.chartData.data.labels = attack_methods
     this.chartData.data.series = [accuracies.map(x => parseFloat(x))]
