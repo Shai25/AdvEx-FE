@@ -64,6 +64,7 @@ export default {
           // TODO: change to modals
           // TODO: refresh page
           alert('Email/Password not matched.');
+          location.reload();
         }
       })
       .catch(e => {})
