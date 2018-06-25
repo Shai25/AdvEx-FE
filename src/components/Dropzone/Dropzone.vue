@@ -82,14 +82,6 @@ export default {
         alert('Please make sure that exactly one model and exactly one index are selected.');
       }
       else {
-        if (ext0 == 'h5') {
-          this.model_key = file0;
-          this.index_key = file1;
-        }
-        else {
-          this.model_key = file1;
-          this.index_key = file0;          
-        }
         // alert('Files are not actually uploaded because this is a demo.');
         setTimeout(() => this.dropzone.processFile(this.dropzone.files[0]));
         setTimeout(() => this.dropzone.processFile(this.dropzone.files[1]));
@@ -144,14 +136,22 @@ export default {
         // Wait for uploading to complete, then submit the request
         this.on('queuecomplete', () => {
           // Check whether it's the failure case
-          this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0;
-          vm.submitJob();
+          if (!(this.files[0].status != Dropzone.SUCCESS && this.getQueuedFiles().length <= 1)) {
+            vm.submitJob();
+          }
         });
       },
       // Here we request a signed upload URL when a file being accepted
       accept (file, done) {
         vm.fileCnt = this.files.length;
-        var uploadName = file.upload.uuid + '.' + file.name.split('.').pop();
+        var ext = file.name.split('.').pop();
+        var uploadName = file.upload.uuid + '.' + ext;
+        if (ext == 'h5') {
+          vm.model_key = uploadName;
+        }
+        else {
+          vm.index_key = uploadName;
+        }
 
         lambda.getSignedURL(uploadName, file.type)
           .then((url) => {
