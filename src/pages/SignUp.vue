@@ -57,7 +57,8 @@ export default {
         {
           headers: {
             'Content-type': 'application/json',
-          }
+          },
+          withCredentials: true
         }
       )
       .then(response => {

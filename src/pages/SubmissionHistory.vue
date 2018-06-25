@@ -85,7 +85,12 @@ export default {
   created() {
     // TODO: get url from config
     axios.get('http://localhost:5000/users/' + this.$session.get('user_id') + '/submissions',
-      { 'headers': { 'Authorization': this.$session.get('token') } })
+      {
+        'headers': {
+          'Authorization': this.$session.get('token')
+        },
+        withCredentials: true
+      })
     .then(response => {
       this.data = response.data.submissions
     })

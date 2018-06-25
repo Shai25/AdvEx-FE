@@ -4,7 +4,7 @@ import router from "./router/index";
 
 import axios from 'axios';
 global.axios = axios;
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 import VueSession from 'vue-session';
 Vue.use(VueSession);
