@@ -25,29 +25,30 @@ export default {
   },
 
   methods: {
-    submit: function(model_name) {
-      this.$router.push('/history');
-      // TODO: get API from config
-      // axios.post('https://private-8bf72-advex.apiary-mock.com/users',
-      //   {
-      //     'email': this.email,
-      //     'nickname': this.name,
-      //     'password': this.password
-      //   },
-      //   {
-      //     headers: {
-      //       'Content-type': 'application/json',
-      //     }
-      //   }
-      // )
-      // .then(response => {
-      //   console.log(response)
-      //   if (response.status == 200) {
-      //     // alert('success')
-      //     this.$router.push('/submission/4')
-      //   }
-      // })
-      // .catch(e => {})
+    submit: function(model_name, model_key, index_key) {
+      // TODO: get url from config
+      axios.post('http://localhost:5000/submit',
+        {
+          'user_id': this.$session.get('user_id'),
+          'model_name': model_name,
+          's3_model_key': model_key,
+          's3_index_key': index_key
+        },
+        {
+          headers: {
+            'Authorization': this.$session.get('token'),
+            'Content-type': 'application/json',
+          },
+          withCredentials: true
+        }
+      )
+      .then(response => {
+        console.log(response)
+        if (response.status == 200) {
+          this.$router.push('/history');
+        }
+      })
+      .catch(e => {})
     }
   }
 }

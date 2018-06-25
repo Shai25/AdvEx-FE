@@ -48,7 +48,7 @@
       display: fileCnt === 2 ? 'inline-flex' : 'none',
     }">
       <input type="text" id="model_name" required="required" placeholder="Model Name" v-model="model_name"/>
-      <button class="btn btn-primary" v-on:click="onSubmit">Submit</button>
+      <button class="btn btn-primary" v-on:click="initUpload">Submit</button>
     </div>
   </form>
 </template>
@@ -66,25 +66,38 @@ export default {
   data () {
     return {
       fileCnt: 0,
-      model_name: ''
+      model_name: '',
+      model_key: '',
+      index_key: ''
     }
   },
 
   methods: {
-    onSubmit() {
-      var ext0 = this.dropzone.files[0].name.split('.').pop();
-      var ext1 = this.dropzone.files[1].name.split('.').pop();
+    initUpload() {
+      var file0 = this.dropzone.files[0].name;
+      var file1 = this.dropzone.files[1].name;
+      var ext0 = file0.split('.').pop();
+      var ext1 = file1.split('.').pop();
       if (ext0 == 'h5' && ext1 == 'h5' || ext0 == 'json' && ext1 == 'json') {
         alert('Please make sure that exactly one model and exactly one index are selected.');
       }
       else {
-        console.log('Start uploading');
-        alert('Files are not actually uploaded because this is a demo.');
-        // setTimeout(() => this.dropzone.processFile(this.dropzone.files[0]));
-        // setTimeout(() => this.dropzone.processFile(this.dropzone.files[1]));
-        console.log('Before submit');
-        this.submit(this.model_name);
+        if (ext0 == 'h5') {
+          this.model_key = file0;
+          this.index_key = file1;
+        }
+        else {
+          this.model_key = file1;
+          this.index_key = file0;          
+        }
+        // alert('Files are not actually uploaded because this is a demo.');
+        setTimeout(() => this.dropzone.processFile(this.dropzone.files[0]));
+        setTimeout(() => this.dropzone.processFile(this.dropzone.files[1]));
       }
+    },
+
+    submitJob() {
+      this.submit(this.model_name, this.model_key, this.index_key);
     }
   },
 
@@ -127,15 +140,20 @@ export default {
         this.on('removedfile', (file) => {
           vm.fileCnt = this.files.length;
         });
+
+        // Wait for uploading to complete, then submit the request
+        this.on('queuecomplete', () => {
+          // Check whether it's the failure case
+          this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0;
+          vm.submitJob();
+        });
       },
       // Here we request a signed upload URL when a file being accepted
       accept (file, done) {
-        console.log(file);
-        console.log(file.upload.uuid);
-
         vm.fileCnt = this.files.length;
+        var uploadName = file.upload.uuid + '.' + file.name.split('.').pop();
 
-        lambda.getSignedURL(file)
+        lambda.getSignedURL(uploadName, file.type)
           .then((url) => {
             file.uploadURL = url;
             // done()
