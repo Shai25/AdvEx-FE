@@ -160,13 +160,14 @@ export default {
         withCredentials: true
       })
     .then(response => {
-      console.log(response);
+      // console.log(response);
+      // console.log(Object.keys(response.data.feedback).length);
 
       this.model_name = response.data.model_name;
       this.status = response.data.status;
       this.submitted_at = response.data.created_at;
 
-      if (response.data.feedback === null) {
+      if (response.data.feedback === null || Object.keys(response.data.feedback).length === 0) {
         return;
       }
 

@@ -45,7 +45,7 @@ export default {
       .then(response => {
         console.log(response)
         if (response.status == 200) {
-          this.$router.push('/history');
+          this.$router.push('/submission/' + response.data.submission_id);
         }
       })
       .catch(e => {})
