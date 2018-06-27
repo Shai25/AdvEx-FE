@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div v-if="!error">
+    <div v-if="!error && feedback_ready">
       <div class="row">
         <div class="col-md-6">
           <card>
@@ -91,6 +91,7 @@ export default {
       model_name: "",
       status: "",
       submitted_at: "",
+      feedback_ready: false,
       error: false,
       error_msg: "",
 
@@ -165,12 +166,17 @@ export default {
       this.status = response.data.status;
       this.submitted_at = response.data.created_at;
 
+      if (response.data.feedback === null) {
+        return;
+      }
+
       if ('error' in response.data.feedback) {
         this.error = true;
         this.error_msg = response.data.feedback.error;
         return;
       }
 
+      this.feedback_ready = true;
       this.feedback = response.data.feedback;
   
       var attack_methods = this.feedback.details.map(x => x.attack_method)
