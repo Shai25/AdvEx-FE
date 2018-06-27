@@ -2,11 +2,11 @@ import axios from 'axios'
 import config from '@/config'
 
 export default {
-  getSignedURL (file) {
+  getSignedURL (fileName, fileType) {
     let endpoint = config.AWS_LAMBDA_GETSIGNEDURL_ENDPOINT
     let payload = {
-      filePath: file.name,
-      contentType: file.type
+      filePath: fileName,
+      contentType: fileType
     }
     return axios.post(endpoint, payload)
       .then((res) => {

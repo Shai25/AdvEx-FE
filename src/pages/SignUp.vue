@@ -6,7 +6,7 @@
         <div class="input-group">
           <label class="control-label col-sm-4" for="name">Name</label><i class="bar"></i>
           <div class="col-sm-8">
-            <input type="text" id="name" required="required"/>
+            <input type="text" id="name" required="required" v-model="nickname"/>
           </div>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <div class="input-group">
           <label class="control-label col-sm-4" for="email">Email</label><i class="bar"></i>
           <div class="col-sm-8">
-            <input type="text" id="email" required="required"/>
+            <input type="text" id="email" required="required" v-model="email"/>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
         <div class="input-group">
           <label class="control-label col-sm-4" for="password">Password</label><i class="bar"></i>
           <div class="col-sm-8">
-            <input type="password" id="password" required="required"/>
+            <input type="password" id="password" required="required" v-model="password"/>
           </div>
         </div>
       </div>
@@ -39,6 +39,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      nickname: '',
       email: '',
       password: ''
     }
@@ -47,16 +48,17 @@ export default {
   methods: {
     signup: function() {
       // TODO: get API from config
-      axios.post('https://private-8bf72-advex.apiary-mock.com/users',
+      axios.post('http://localhost:5000/users',
         {
+          'nickname': this.nickname,
           'email': this.email,
-          'nickname': this.name,
           'password': this.password
         },
         {
           headers: {
             'Content-type': 'application/json',
-          }
+          },
+          withCredentials: true
         }
       )
       .then(response => {

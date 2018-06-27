@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   data() {
     return {
@@ -38,8 +37,8 @@ export default {
 
   methods: {
     login: function() {
-      // TODO: get API from config
-      axios.post('https://private-8bf72-advex.apiary-mock.com/login',
+      // TODO: get url from config
+      axios.post('http://localhost:5000/login',
         {
           'email': this.email,
           'password': this.password
@@ -47,17 +46,25 @@ export default {
         {
           headers: {
             'Content-type': 'application/json',
-          }
+          },
+          withCredentials: true
         }
       )
       .then(response => {
-        console.log(response)
-        if (response.status == 200) {
+        console.log(response);
+        if (response.status == 200 && !('error' in response.data)) {
           this.$session.start();
           this.$session.set('token', response.data.token);
           this.$session.set('user_id', response.data.user_id);
-          axios.defaults.headers.common['Authorization'] = 'Basic ' + response.data.user_id + ':' + response.data.token;
+          // axios.defaults.headers.common['Authorization'] = 'Basic ' + response.data.user_id + ':' + response.data.token;
+          // axios.defaults.headers.common['Authorization'] = response.data.token;
           this.$router.push('/');
+        }
+        else {
+          // TODO: change to modals
+          // TODO: refresh page
+          alert('Email/Password not matched.');
+          location.reload();
         }
       })
       .catch(e => {})
