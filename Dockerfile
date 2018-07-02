@@ -1,12 +1,12 @@
 FROM node:9
 
-ADD ./fe /fe
+ADD . /fe
 WORKDIR /fe
 
 RUN npm install
 RUN npm run build
 RUN npm install serve --g
 
-EXPOSE 80
+EXPOSE 5000
 
-CMD ["serve", "-l",  "80", "dist/"]
+CMD ["serve", "dist/"]
