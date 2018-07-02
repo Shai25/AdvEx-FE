@@ -1,0 +1,1 @@
+git archive --format=tar --prefix=fe/ HEAD | (tar xf -)
