@@ -22,7 +22,12 @@ npm run dev
 npm run build
 ```
 
-### Deploy to Elastic Beanstalk
+### Deploy to Elastic Beanstalk (through EB CLI)
+
+1. Run `eb init` and finish setup.
+2. Run `eb deploy`. (This will deploy the newest commit of the current branch.)
+
+### Deploy to Elastic Beanstalk (through Web Console)
 
 1. Run `./pack.sh`
 2. Zip `/fe` (without the parent directory) and upload the bundle to Elastic Beanstalk.

@@ -1,3 +1,3 @@
 module.exports = {
-  baseUrl: process.env.NODE_ENV === 'production' ? 'http://advex.org' : '/'
+  baseUrl: process.env.NODE_ENV === 'production' ? 'https://advex.org' : '/'
 };
