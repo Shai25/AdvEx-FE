@@ -4,5 +4,5 @@
     {
       "ContainerPort": "5000"
     }
-  ],
+  ]
 }
