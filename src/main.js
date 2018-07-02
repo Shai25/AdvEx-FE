@@ -6,6 +6,9 @@ import axios from 'axios';
 global.axios = axios;
 // axios.defaults.withCredentials = true;
 
+var apiPrefix = (process.env.NODE_ENV === 'production' ? 'http://api.advex.org' : 'http://localhost:5000');
+global.apiPrefix = apiPrefix;
+
 import VueSession from 'vue-session';
 Vue.use(VueSession);
 

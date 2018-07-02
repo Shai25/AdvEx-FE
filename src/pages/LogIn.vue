@@ -37,8 +37,7 @@ export default {
 
   methods: {
     login: function() {
-      // TODO: get url from config
-      axios.post('http://localhost:5000/login',
+      axios.post(apiPrefix + '/login',
         {
           'email': this.email,
           'password': this.password

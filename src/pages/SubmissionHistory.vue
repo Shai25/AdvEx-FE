@@ -83,8 +83,7 @@ export default {
   },
 
   created() {
-    // TODO: get url from config
-    axios.get('http://localhost:5000/users/' + this.$session.get('user_id') + '/submissions',
+    axios.get(apiPrefix + '/users/' + this.$session.get('user_id') + '/submissions',
       {
         'headers': {
           'Authorization': this.$session.get('token')

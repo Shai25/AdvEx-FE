@@ -1,12 +1,25 @@
 <template>
-	
 </template>
 
 <script>
 export default {
-	created: function() {
-		 this.$session.destroy();
-     this.$router.push('/auth/login');
-	}
+  created: function() {
+    axios.post(apiPrefix + '/logout',
+      {
+        'user_id': this.$session.get('user_id')
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        withCredentials: true
+      }
+    )
+    .then(response => {
+      this.$session.destroy();
+      this.$router.push('/auth/login');
+    })
+    .catch(e => {});
+  }
 }
 </script>
