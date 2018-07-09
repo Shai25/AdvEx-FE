@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <card>
-          <h4 class="card-title">Upload Model for Evaluation</h4><hr>
+          <h4 class="card-title">Upload Model for Evaluation (Make Sure to Read Our <router-link class='link' :to="{name: 'Info Page'}">Instruction and Disclaimer</router-link> First)</h4><hr>
           <dropzone v-bind="{submit}"/>
         </card>
       </div>
