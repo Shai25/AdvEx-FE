@@ -1,13 +1,12 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index";
+import config from "./config";
 
 import axios from 'axios';
 global.axios = axios;
 // axios.defaults.withCredentials = true;
-
-var apiPrefix = (process.env.NODE_ENV === 'production' ? 'https://api.advex.org' : 'http://localhost:5000');
-global.apiPrefix = apiPrefix;
+global.API_PREFIX = config.API_PREFIX;
 
 import VueSession from 'vue-session';
 Vue.use(VueSession);

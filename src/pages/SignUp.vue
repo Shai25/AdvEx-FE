@@ -47,7 +47,7 @@ export default {
 
   methods: {
     signup: function() {
-      axios.post(apiPrefix + '/users',
+      axios.post(API_PREFIX + '/users',
         {
           'nickname': this.nickname,
           'email': this.email,

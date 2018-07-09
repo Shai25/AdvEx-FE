@@ -37,7 +37,7 @@ export default {
 
   methods: {
     login: function() {
-      axios.post(apiPrefix + '/login',
+      axios.post(API_PREFIX + '/login',
         {
           'email': this.email,
           'password': this.password

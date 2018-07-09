@@ -83,7 +83,7 @@ export default {
   },
 
   created() {
-    axios.get(apiPrefix + '/users/' + this.$session.get('user_id') + '/submissions',
+    axios.get(API_PREFIX + '/users/' + this.$session.get('user_id') + '/submissions',
       {
         'headers': {
           'Authorization': this.$session.get('token')

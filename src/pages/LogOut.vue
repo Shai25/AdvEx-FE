@@ -4,7 +4,7 @@
 <script>
 export default {
   created: function() {
-    axios.post(apiPrefix + '/logout',
+    axios.post(API_PREFIX + '/logout',
       {
         'user_id': this.$session.get('user_id')
       },

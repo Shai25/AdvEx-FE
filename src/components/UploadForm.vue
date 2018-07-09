@@ -26,7 +26,7 @@ export default {
 
   methods: {
     submit: function(model_name, model_key, index_key) {
-      axios.post(apiPrefix + '/submit',
+      axios.post(API_PREFIX + '/submit',
         {
           'user_id': this.$session.get('user_id'),
           'model_name': model_name,
