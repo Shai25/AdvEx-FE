@@ -26,8 +26,7 @@ export default {
 
   methods: {
     submit: function(model_name, model_key, index_key) {
-      // TODO: get url from config
-      axios.post('http://localhost:5000/submit',
+      axios.post(apiPrefix + '/submit',
         {
           'user_id': this.$session.get('user_id'),
           'model_name': model_name,

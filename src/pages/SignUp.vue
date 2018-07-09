@@ -47,8 +47,7 @@ export default {
 
   methods: {
     signup: function() {
-      // TODO: get API from config
-      axios.post('http://localhost:5000/users',
+      axios.post(apiPrefix + '/users',
         {
           'nickname': this.nickname,
           'email': this.email,

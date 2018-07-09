@@ -1,6 +1,7 @@
 package-lock.json
 .DS_Store
 dist/
+fe/
 
 # Created by https://www.gitignore.io/api/node
 
@@ -66,3 +67,7 @@ typings/
 
 
 # End of https://www.gitignore.io/api/node
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
