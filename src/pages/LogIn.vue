@@ -51,7 +51,7 @@ export default {
       )
       .then(response => {
         console.log(response);
-        if (response.status == 200 && !('error' in response.data)) {
+        if (response.status == 200) {
           this.$session.start();
           this.$session.set('token', response.data.token);
           this.$session.set('user_id', response.data.user_id);
@@ -59,13 +59,18 @@ export default {
           // axios.defaults.headers.common['Authorization'] = response.data.token;
           this.$router.push('/');
         }
-        else {
-          // TODO: change alert to modal
-          alert('Email/Password not matched.');
-          location.reload();
-        }
       })
-      .catch(e => {});
+      .catch(e => {
+        // console.log(e.response);
+        if ('error' in e.response.data) {
+          // TODO: change alert to modal
+          alert(e.response.data.error);
+        }
+        else {
+          alert('Email/Password not matched.');
+        }
+        location.reload();
+      });
     }
   }
 }
