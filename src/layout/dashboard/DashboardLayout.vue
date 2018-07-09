@@ -6,7 +6,7 @@
         <!-- <sidebar-link to="/profile" name="User Profile" icon="ti-user"/> -->
         <sidebar-link to="/history" name="Submission History" icon="ti-view-list-alt"/>
         <!-- <sidebar-link to="/submission/1" name="Submission Detail" icon="ti-info-alt"/> -->
-        <sidebar-link to="/help" name="Help Page" icon="ti-help-alt"/>
+        <sidebar-link to="/info" name="Info Page" icon="ti-help-alt"/>
         <sidebar-link to="/logout" name="Log Out" icon="ti-arrow-left"/>
       </template>
     </side-bar>

@@ -12,7 +12,7 @@ import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import SubmissionHistory from "@/pages/SubmissionHistory.vue";
 import SubmissionDetail from "@/pages/SubmissionDetail.vue";
-import HelpPage from "@/pages/HelpPage.vue";
+import InfoPage from "@/pages/InfoPage.vue";
 import LogOut from "@/pages/LogOut.vue";
 
 const routes = [
@@ -58,9 +58,9 @@ const routes = [
         component: SubmissionDetail
       },
       {
-        path: "help",
-        name: "Help Page",
-        component: HelpPage
+        path: "info",
+        name: "Info Page",
+        component: InfoPage
       },
       {
         path: "logout",
