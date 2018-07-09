@@ -60,13 +60,12 @@ export default {
           this.$router.push('/');
         }
         else {
-          // TODO: change to modals
-          // TODO: refresh page
+          // TODO: change alert to modal
           alert('Email/Password not matched.');
           location.reload();
         }
       })
-      .catch(e => {})
+      .catch(e => {});
     }
   }
 }

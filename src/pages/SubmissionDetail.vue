@@ -58,7 +58,6 @@
                       :chart-options="chartData.options">
           </chart-card>
         </div>
-
       </div>
 
       <div class="row">
@@ -91,6 +90,7 @@ export default {
       model_name: "",
       status: "",
       submitted_at: "",
+
       feedback_ready: false,
       error: false,
       error_msg: "",
@@ -125,7 +125,7 @@ export default {
       //       "accuracy": "94.10%"
       //     }
       //   ], 
-      //   "suggestion": "Your model can be made more robust by training it with some of the adversarial examples."
+      //   "suggestion": "Your model can be made more robust by training it with adversarial examples."
       // },
 
       chartData: {
@@ -160,7 +160,6 @@ export default {
       })
     .then(response => {
       // console.log(response);
-      // console.log(Object.keys(response.data.feedback).length);
 
       this.model_name = response.data.model_name;
       this.status = response.data.status;
@@ -179,21 +178,21 @@ export default {
       this.feedback_ready = true;
       this.feedback = response.data.feedback;
   
-      var attack_methods = this.feedback.details.map(x => x.attack_method)
-      this.tableHeaders = this.tableHeaders.concat(attack_methods)
+      var attack_methods = this.feedback.details.map(x => x.attack_method);
+      this.tableHeaders = this.tableHeaders.concat(attack_methods);
 
-      var accuracies = this.feedback.details.map(x => x.accuracy)
-      this.tableAccuracies = this.tableAccuracies.concat(accuracies)
+      var accuracies = this.feedback.details.map(x => x.accuracy);
+      this.tableAccuracies = this.tableAccuracies.concat(accuracies);
 
-      var confidences = this.feedback.details.map(x => x.confidence)
-      this.tableConfidences = this.tableConfidences.concat(confidences)
+      var confidences = this.feedback.details.map(x => x.confidence);
+      this.tableConfidences = this.tableConfidences.concat(confidences);
 
-      this.chartData.data.labels = attack_methods
-      this.chartData.data.series = [accuracies.map(x => parseFloat(x))]
+      this.chartData.data.labels = attack_methods;
+      this.chartData.data.series = [accuracies.map(x => parseFloat(x))];
 
-      console.log(this.chartData)
+      // console.log(this.chartData);
     })
-    .catch(e => {})
+    .catch(e => {});
 
   }
 

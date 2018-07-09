@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   data() {
     return {
@@ -63,10 +62,10 @@ export default {
       .then(response => {
         console.log(response)
         if (response.status == 200) {
-          this.$router.push('/auth/login')
+          this.$router.push('/auth/login');
         }
       })
-      .catch(e => {})
+      .catch(e => {});
     }
   }
 }

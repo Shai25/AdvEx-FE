@@ -9,11 +9,11 @@ export default {
     }
     return axios.post(endpoint, payload)
       .then((res) => {
-        return Promise.resolve(res.data.url || '/')
+        return Promise.resolve(res.data.url || '/');
       })
       .catch((err) => {
-        console.error(err)
-        return Promise.reject('/')
-      })
+        console.error(err);
+        return Promise.reject('/');
+      });
   }
 }

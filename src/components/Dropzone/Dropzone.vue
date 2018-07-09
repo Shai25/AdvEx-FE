@@ -61,6 +61,7 @@ Dropzone.autoDiscover = false;
 
 export default {
   name: 'dropzone',
+  // submit is a function passed from parent
   props: ['submit'],
 
   data () {
@@ -73,13 +74,14 @@ export default {
   },
 
   methods: {
+    // Called when submit button is pressed
     initUpload() {
       var file0 = this.dropzone.files[0].name;
       var file1 = this.dropzone.files[1].name;
       var ext0 = file0.split('.').pop();
       var ext1 = file1.split('.').pop();
       if (ext0 == 'h5' && ext1 == 'h5' || ext0 == 'json' && ext1 == 'json') {
-        alert('Please make sure that exactly one model and exactly one index are selected.');
+        alert('Please make sure that exactly one model file and exactly one index file are selected.');
       }
       else {
         // alert('Files are not actually uploaded because this is a demo.');
@@ -88,6 +90,7 @@ export default {
       }
     },
 
+    // Called when uploading is finished (triggered by queuecomplete event)
     submitJob() {
       this.submit(this.model_name, this.model_key, this.index_key);
     }
@@ -116,18 +119,19 @@ export default {
       header: '',
       // We're going to process each file manually (see `accept` below)
       autoProcessQueue: true,
-      // Limit file extension (comma-separated list as string)
-      acceptedFiles: ".h5,.json",
       // Show remove buttons
       addRemoveLinks: true,
-      // Limit # of files uploadable      
+      // Limit file extension (comma-separated list as string)
+      acceptedFiles: ".h5,.json",
+      // Limit # of files      
       maxFiles: 2,
       // Limit size of files
       maxFilesize: 1024,
-
+      // Make the zone unclickable after 2 files have been selected
       clickable: vm.fileCnt < 2,
       
       init () {
+        // Disable multiple select to avoid bypassing checks for # of files
         this.hiddenFileInput.removeAttribute('multiple');
 
         // Listener for removing files
@@ -143,10 +147,11 @@ export default {
           }
         });
       },
-      // Here we request a signed upload URL when a file being accepted
+      // Request a pre-signed uploading URL when a file is accepted
       accept (file, done) {
         vm.fileCnt = this.files.length;
         var ext = file.name.split('.').pop();
+        // Rename the file to its UUID to avoid conflicts on S3
         var uploadName = file.upload.uuid + '.' + ext;
         if (ext == 'h5') {
           vm.model_key = uploadName;

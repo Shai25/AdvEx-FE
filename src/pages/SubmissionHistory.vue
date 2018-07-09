@@ -7,21 +7,17 @@
             <thead>
               <th v-for="column in headers" :key="column">{{column}}</th>
             </thead>
-
             <tbody>
             <tr v-for="(row, index) in data" :key="index">
               <td>
                 <router-link :to="/submission/ + row['submission_id']">{{row['submission_id']}}</router-link>
               </td>
-
               <td>
                 {{row['model_name']}}
               </td>
-
               <td>
                 {{row['status']}}
               </td>
-
               <td>
                 {{row['created_at']}}
               </td>
@@ -40,10 +36,6 @@ const columnNames = ["Submission ID", "Model Name", "Status", "Submitted At"];
 const columnKeys = ["submission_id", "model_name", "status", "created_at"];
 
 export default {
-  // components: {
-  //   PaperTable
-  // },
-
   data() {
     return {
       headers: [...columnNames],
@@ -91,9 +83,9 @@ export default {
         withCredentials: true
       })
     .then(response => {
-      this.data = response.data.submissions
+      this.data = response.data.submissions;
     })
-    .catch(e => {})
+    .catch(e => {});
   }
 };
 </script>
