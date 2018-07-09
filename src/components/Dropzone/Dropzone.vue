@@ -122,6 +122,8 @@ export default {
       addRemoveLinks: true,
       // Limit # of files uploadable      
       maxFiles: 2,
+      // Limit size of files
+      maxFilesize: 1024,
 
       clickable: vm.fileCnt < 2,
       
