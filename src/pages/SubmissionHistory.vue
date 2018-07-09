@@ -85,7 +85,13 @@ export default {
     .then(response => {
       this.data = response.data.submissions;
     })
-    .catch(e => {});
+    .catch(e => {
+      if (e.response.status == 401) {
+        alert('Please log in first.');
+        this.$session.destroy();
+        this.$router.push('/auth/login');
+      }
+    });
   }
 };
 </script>

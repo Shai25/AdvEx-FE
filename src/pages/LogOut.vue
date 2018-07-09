@@ -11,6 +11,7 @@ export default {
       {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': this.$session.get('token')
         },
         withCredentials: true
       }
@@ -19,7 +20,17 @@ export default {
       this.$session.destroy();
       this.$router.push('/auth/login');
     })
-    .catch(e => {});
+    .catch(e => {
+      // console.log(e.response);
+      if ('error' in e.response.data) {
+        // TODO: change alert to modal
+        alert(e.response.data.error);
+      }
+      else {
+        alert('Failed to log out.');
+      }
+      this.$router.push('/');
+    });
   }
 }
 </script>

@@ -192,7 +192,13 @@ export default {
 
       // console.log(this.chartData);
     })
-    .catch(e => {});
+    .catch(e => {
+      if (e.response.status == 401) {
+        alert('Please log in first.');
+        this.$session.destroy();
+        this.$router.push('/auth/login');
+      }
+    });
 
   }
 

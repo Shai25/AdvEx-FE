@@ -67,7 +67,7 @@ export default {
           alert(e.response.data.error);
         }
         else {
-          alert('Email/Password not matched.');
+          alert('Failed to log in.');
         }
         location.reload();
       });
