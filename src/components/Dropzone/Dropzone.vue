@@ -111,6 +111,8 @@ export default {
           _send.call(xhr, file);
         }
       },
+      // Timeout of 5 minutes
+      timeout: 300000;
       // Upload one file at a time since we're using the S3 pre-signed URL scenario
       parallelUploads: 1,
       uploadMultiple: false,
