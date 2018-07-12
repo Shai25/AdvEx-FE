@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-6">
           <card>
-            <h4 class="card-title">Robustness Score</h4><hr>
+            <h4 class="card-title">Robustness Score <span class="ti-info-alt" v-tooltip.top-center="robustness_score_tooltip_text"></span></h4><hr>
             <h2 style="text-align:center">{{feedback.robustness}}</h2>
           </card>
         </div>
@@ -36,13 +36,16 @@
             <div slot="raw-content" class="table-responsive">
               <table class="table">
                 <thead>
+                  <th>Method</th>
                   <th v-for="column in tableHeaders">{{column}}</th>
                 </thead>
                 <tr>
-                  <td v-for="column in tableAccuracies">{{column}}</td>
+                  <th>Accuracy</th>
+                  <td v-for="column in tableAccuracies">{{column}}%</td>
                 </tr>
                 <tr>
-                  <td v-for="column in tableConfidences">{{column}}</td>
+                  <th>Confidence <span class="ti-info-alt" v-tooltip.top-center="confidence_score_tooltip_text"></span></th>
+                  <td v-for="column in tableConfidences">{{column}}%</td>
                 </tr>
               </table>
             </div>
@@ -60,14 +63,14 @@
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12">
           <card>
             <h4 class="card-title">Suggestion</h4><hr>
             <p style="font-size:20px">{{feedback.suggestion}}</p>
           </card>
         </div>
-      </div>
+      </div> -->
     </div>
 
   </div>
@@ -84,6 +87,9 @@ export default {
 
   data() {
     return {
+      robustness_score_tooltip_text: "The robustness score is the average of attack methods' accuracy degrades, and it ranges from 0 to 100. The lower the score, the better.",
+      confidence_score_tooltip_text: "Using output of the final softmax layer as a probability distribution. The highes score of the softmax layer is the model's prediction, and the score itself is treated as the confidence.",
+
       // model_name: "VGG-16 v1.0",
       // status: "Finished",
       // submitted_at: "2018-05-01 08:40:51",
@@ -95,9 +101,9 @@ export default {
       error: false,
       error_msg: "",
 
-      tableHeaders: ["Method"],
-      tableAccuracies: ["Accuracy"],
-      tableConfidences: ["Confidence"],
+      tableHeaders: [],
+      tableAccuracies: [],
+      tableConfidences: [],
 
       feedback: {},
       // feedback: {
@@ -107,7 +113,7 @@ export default {
       //     {
       //       "attack_method": "CLEAN", 
       //       "confidence": "95%", 
-      //       "accuracy": "80.05%"
+      //       "accuracy": "80.0512345678%"
       //     }, 
       //     {
       //       "attack_method": "FGSM", 
@@ -125,7 +131,6 @@ export default {
       //       "accuracy": "94.10%"
       //     }
       //   ], 
-      //   "suggestion": "Your model can be made more robust by training it with adversarial examples."
       // },
 
       chartData: {
@@ -151,6 +156,23 @@ export default {
   },
 
   created() {
+    // TODO: remove debugging
+    // this.feedback_ready = true;
+
+    // var attack_methods = this.feedback.details.map(x => x.attack_method);
+    // this.tableHeaders = this.tableHeaders.concat(attack_methods);
+
+    // var accuracies = this.feedback.details.map(x => parseFloat(x.accuracy).toFixed(2));
+    // this.tableAccuracies = this.tableAccuracies.concat(accuracies);
+
+    // var confidences = this.feedback.details.map(x => parseFloat(x.confidence).toFixed(2));
+    // this.tableConfidences = this.tableConfidences.concat(confidences);
+
+    // this.chartData.data.labels = attack_methods;
+    // this.chartData.data.series = [accuracies.map(x => parseFloat(x))];
+
+    // return;
+
     axios.get(API_PREFIX + '/submissions/' + this.$route.params.id,
       {
         'headers': {
@@ -181,10 +203,10 @@ export default {
       var attack_methods = this.feedback.details.map(x => x.attack_method);
       this.tableHeaders = this.tableHeaders.concat(attack_methods);
 
-      var accuracies = this.feedback.details.map(x => x.accuracy);
+      var accuracies = this.feedback.details.map(x => parseFloat(x.accuracy).toFixed(2));
       this.tableAccuracies = this.tableAccuracies.concat(accuracies);
 
-      var confidences = this.feedback.details.map(x => x.confidence);
+      var confidences = this.feedback.details.map(x => parseFloat(x.confidence).toFixed(2));
       this.tableConfidences = this.tableConfidences.concat(confidences);
 
       this.chartData.data.labels = attack_methods;
@@ -206,4 +228,109 @@ export default {
 </script>
 
 <style>
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+}
+
+.tooltip .tooltip-inner {
+  background: black;
+  color: white;
+  border-radius: 16px;
+  padding: 5px 10px 4px;
+}
+
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+  border-color: black;
+  z-index: 1;
+}
+
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}
+
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+
+.tooltip[x-placement^="bottom"] .tooltip-arrow {
+  border-width: 0 5px 5px 5px;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+  top: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tooltip[x-placement^="right"] {
+  margin-left: 5px;
+}
+
+.tooltip[x-placement^="right"] .tooltip-arrow {
+  border-width: 5px 5px 5px 0;
+  border-left-color: transparent !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  left: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+
+.tooltip[x-placement^="left"] .tooltip-arrow {
+  border-width: 5px 0 5px 5px;
+  border-top-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  right: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.tooltip.popover .popover-inner {
+  background: #f9f9f9;
+  color: black;
+  padding: 24px;
+  border-radius: 5px;
+  box-shadow: 0 5px 30px rgba(black, .1);
+}
+
+.tooltip.popover .popover-arrow {
+  border-color: #f9f9f9;
+}
+
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .15s, visibility .15s;
+}
+
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .15s;
+}
 </style>
