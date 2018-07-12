@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <card>
           <h4 class="card-title">Submission # {{$route.params.id}}</h4><hr>
           <p>Model Name: {{model_name}}</p>
@@ -10,25 +10,16 @@
           <p v-if="error">Error Message: {{error_msg}}</p>
         </card>
       </div>
+
+      <div class="col-md-6" v-if="!error && feedback_ready">
+        <card>
+          <h4 class="card-title">Robustness Score <span class="ti-info-alt" v-tooltip.top-center="robustness_score_tooltip_text"></span></h4><hr>
+          <h2 style="text-align:center">{{feedback.robustness}}</h2>
+        </card>
+      </div>      
     </div>
 
     <div v-if="!error && feedback_ready">
-      <div class="row">
-        <div class="col-md-6">
-          <card>
-            <h4 class="card-title">Robustness Score <span class="ti-info-alt" v-tooltip.top-center="robustness_score_tooltip_text"></span></h4><hr>
-            <h2 style="text-align:center">{{feedback.robustness}}</h2>
-          </card>
-        </div>
-        
-        <div class="col-md-6">
-          <card>
-            <h4 class="card-title">Rating</h4><hr>
-            <h2 style="text-align:center">{{feedback.rating}}</h2>
-          </card>
-        </div>
-      </div>
-
       <div class="row">
         <div class="col-md-12">
           <card>
