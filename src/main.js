@@ -9,7 +9,7 @@ global.axios = axios;
 global.API_PREFIX = config.API_PREFIX;
 
 import VueSession from 'vue-session';
-Vue.use(VueSession);
+Vue.use(VueSession, { persist: true });
 
 import VTooltip from 'v-tooltip';
 Vue.use(VTooltip);
