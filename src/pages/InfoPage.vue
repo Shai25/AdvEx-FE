@@ -7,7 +7,7 @@
 
         <p style="line-height:20px">We understand that machine learning models could be of significant research and business value. Therefore, we spare no effort to protect your models. The model you selected will be directly uploaded to an Amazon S3 bucket. After our worker has retrieved and evaluated your model, it will be immediately deleted. Furthermore, we will periodically purge any outdated files from S3.</p>
 
-        <p style="line-height:20px">We implement reasonable precautions and follow industry best practices to ensure the safety of our website infrastructure, so that no personal information or valuable data are compromised. For more details, please visit our <a href="https://drive.google.com/file/d/1jSk6BcPGaBUjFAoBHhg3KN9h3Ydl-_NU/view?usp=sharing">Privacy Policy</a></p>
+        <p style="line-height:20px">We implement reasonable precautions and follow industry best practices to ensure the safety of our website infrastructure, so that no personal information or valuable data are compromised. For more details, please visit our <a href="https://docs.google.com/document/d/1gCFnAqsdiykMvUm6TygHS8F5gcHtEHx58korWcN29y4/edit?usp=sharing">Privacy Policy</a></p>
       </card>
     </div>
 
