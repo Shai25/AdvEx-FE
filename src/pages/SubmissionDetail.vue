@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       robustness_score_tooltip_text: "The robustness score is the average of attack methods' accuracy degrades, and it ranges from 0 to 100. The lower the score, the better.",
-      confidence_score_tooltip_text: "Using output of the final softmax layer as a probability distribution. The highes score of the softmax layer is the model's prediction, and the score itself is treated as the confidence.",
+      confidence_score_tooltip_text: "Using the output of the final softmax layer as a probability distribution. The highest score of the softmax layer is the model's prediction, and the score itself is treated as the confidence.",
 
       // model_name: "VGG-16 v1.0",
       // status: "Finished",
