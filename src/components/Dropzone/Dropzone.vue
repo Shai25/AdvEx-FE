@@ -37,18 +37,18 @@
 
 <template>
   <form class="dropzone" @submit.prevent="initUpload">
-    <div class="upload-msg" v-bind:style="{
-      display: fileCnt !== 2 ? 'inline-block' : 'none',
-      margin: fileCnt === 0 ? 0 : '0 32px',
-      width: fileCnt === 0 ? '100%' : 'initial',
-    }">
-      {{fileCnt <= 2 ? "Upload your model (.h5) and index (.json) files." : "Please only select 2 files!"}}
-    </div>
     <div class="upload-form" v-bind:style="{
       display: fileCnt === 2 ? 'inline-flex' : 'none',
     }">
       <input type="text" id="model_name" required="required" placeholder="Model Name" v-model="model_name"/>
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit">Upload</button>
+    </div>
+    <div class="upload-msg" v-bind:style="{
+      display: fileCnt !== 2 || uploading ? 'inline-block' : 'none',
+      margin: fileCnt === 0 ? 0 : '0 32px',
+      width: fileCnt === 0 ? '100%' : 'initial',
+    }">
+      {{uploading ? "Uploading... Stay on as it could take a while." : (fileCnt <= 2 ? "Upload your model (.h5) and index (.json) files." : "Please only select 2 files!")}}
     </div>
   </form>
 </template>
@@ -67,6 +67,7 @@ export default {
   data () {
     return {
       fileCnt: 0,
+      uploading: false,
       model_name: '',
       model_key: '',
       index_key: ''
@@ -85,6 +86,7 @@ export default {
       }
       else {
         // alert('Files are not actually uploaded because this is a demo.');
+        this.uploading = true;
         setTimeout(() => this.dropzone.processFile(this.dropzone.files[0]));
         setTimeout(() => this.dropzone.processFile(this.dropzone.files[1]));
       }
@@ -106,10 +108,14 @@ export default {
       // Hijack the xhr.send since Dropzone always upload file by using formData
       // ref: https://github.com/danialfarid/ng-file-upload/issues/743
       sending (file, xhr) {
-        let _send = xhr.send
+        let _send = xhr.send;
         xhr.send = () => {
           _send.call(xhr, file);
-        }
+        };
+        xhr.ontimeout = (e) => {
+          alert("Upload timeout (30 min). Please try again in an internet environment with higher uploading bandwidth.");
+          location.reload();
+        };
       },
       // Timeout of 30 minutes
       timeout: 1800000,
@@ -143,9 +149,13 @@ export default {
 
         // Wait for uploading to complete, then submit the request
         this.on('queuecomplete', () => {
-          // Check whether it's the failure case
-          if (!(this.files[0].status != Dropzone.SUCCESS && this.getQueuedFiles().length <= 1)) {
+          if (this.files.length === 2 && this.files[0].status === Dropzone.SUCCESS && this.files[1].status === Dropzone.SUCCESS) {
+            console.log('Upload -> Submit');
             vm.submitJob();
+          }
+          else {
+            alert('Upload failed. Please try again. If this problem persists, please contact our administrators.');
+            location.reload();
           }
         });
       },
