@@ -1,6 +1,8 @@
 <template>
   <div class="row">
 
+    <a href="#/dashboard" class="nav-link"><p>Back to Dashboard</p></a>
+
     <div class="col-12">
       <card>
         <h3>Disclaimer</h3><hr>

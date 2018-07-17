@@ -1,6 +1,10 @@
 <template>
   <div>
     <div class="row">
+      <a href="#/history" class="nav-link"><p>Back to Submission History</p></a>
+    </div>
+
+    <div class="row">
       <div class="col-md-6">
         <card>
           <h4 class="card-title">Submission # {{$route.params.id}}</h4><hr>
