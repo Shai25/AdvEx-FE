@@ -42,7 +42,7 @@
       margin: fileCnt === 0 ? 0 : '0 32px',
       width: fileCnt === 0 ? '100%' : 'initial',
     }">
-      Upload your model (.h5) and index (.json) files.
+      {{fileCnt <= 2 ? "Upload your model (.h5) and index (.json) files." : "Please only select 2 files!"}}
     </div>
     <div class="upload-form" v-bind:style="{
       display: fileCnt === 2 ? 'inline-flex' : 'none',
@@ -133,10 +133,10 @@ export default {
       clickable: vm.fileCnt < 2,
       
       init () {
-        // Disable multiple select to avoid bypassing checks for # of files
-        this.hiddenFileInput.removeAttribute('multiple');
-
-        // Listener for removing files
+        // Maintain a counter of # of files
+        this.on('addedfile', (file) => {
+          vm.fileCnt = this.files.length;
+        });
         this.on('removedfile', (file) => {
           vm.fileCnt = this.files.length;
         });
