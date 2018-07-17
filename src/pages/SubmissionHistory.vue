@@ -84,6 +84,7 @@ export default {
       })
     .then(response => {
       this.data = response.data.submissions;
+      this.data.sort((a, b) => { return (a.submission_id > b.submission_id) ? 1 : ((b.submission_id > a.submission_id) ? -1 : 0); });
     })
     .catch(e => {
       if (e.response.status == 401) {
