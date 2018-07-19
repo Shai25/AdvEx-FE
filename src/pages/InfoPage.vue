@@ -30,7 +30,7 @@
         <p style="text-indent:2em">＊ We can only evaluate models that are trained using ImageNet dataset.</p>
         <p style="text-indent:2em">＊ We will need additional details about your model. Given below is a description of what you need to provide us with.</p>
 
-        <p style="line-height:20px">Each of the classes in ImageNet has a unique class ID. For example, n01443537 is the ID of goldfish. Thus, along with your model, you need to also upload a JSON file that contains the mapping between your output index and the ImageNet unique class ID. You can find an sample JSON file <a href="https://s3.amazonaws.com/advex/imagenet_class_index.json">here</a>.</p>
+        <p style="line-height:20px">Each of the classes in ImageNet has a unique class ID. For example, n01443537 is the ID of goldfish. Thus, along with your model, you need to also upload a JSON file that contains the mapping between your output index and the ImageNet unique class ID. You can find a sample JSON file <a href="https://s3.amazonaws.com/advex/imagenet_class_index.json">here</a>.</p>
 
         <p>The key should be the class index and the value should be the ImageNet unique class ID.</p>
       </card>
