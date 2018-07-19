@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV === 'production' && window.location.protocol !== 'https:') {
+	window.location.href = 'https://advex.org';
+}
+
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index";
