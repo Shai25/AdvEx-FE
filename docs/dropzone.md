@@ -1,6 +1,13 @@
 # S3-Dropzone
 
-This component uses Amazon Lambda to serverlessly create pre-signed URLs, which are then used to upload files to Amazon S3 directly from the browser.
+This document lists the steps needed to set up Amazon Lambda to serverlessly create pre-signed URLs, which are then used to upload files to Amazon S3 directly from the browser.
+
+## Disclaimer
+
+This document is intended for developers with basic understanding of JavaScript, Web development and Amazon Web Services. We recommend the following resources if you need some catch-up materials:
+
+- [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
+- [Getting Started on Amazon Web Services (AWS)](https://aws.amazon.com/getting-started/)
 
 ## Dependencies
 
