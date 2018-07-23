@@ -6,7 +6,7 @@ This document lists the steps needed to set up Amazon Lambda to serverlessly cre
 
 This document is intended for developers with basic understanding of JavaScript, Web development and Amazon Web Services. We recommend the following resources if you need some catch-up materials:
 
-- [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
+- [Web Technology for Developers](https://developer.mozilla.org/en-US/docs/Web)
 - [Getting Started on Amazon Web Services (AWS)](https://aws.amazon.com/getting-started/)
 
 ## Dependencies
