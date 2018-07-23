@@ -22,7 +22,7 @@
 
         <p style="text-indent:2em">1. Your Image Classification model (trained on Keras) to be evaluated.</p>
         <p style="text-indent:4em">＊  You will need to upload the entire model, including its weights and architecture.</p>
-        <p style="text-indent:4em">＊  The best way to do it is to use model.save fucntion. Here is the <a href="https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model">reference</a>.</p>
+        <p style="text-indent:4em">＊  The best way to do it is to use model.save function. Here is the <a href="https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model">reference</a>.</p>
 
         <p style="text-indent:2em">2. A JSON file that has a mapping of your classes to the ImageNet classes.</p>
 
