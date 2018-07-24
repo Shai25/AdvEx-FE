@@ -18,7 +18,7 @@
       <div class="col-md-6" v-if="!error && feedback_ready">
         <card>
           <h4 class="card-title">Robustness Score <span class="ti-info-alt" v-tooltip.top-center="robustness_score_tooltip_text"></span></h4><hr>
-          <h2 style="text-align:center">{{feedback.robustness}}</h2>
+          <h2 style="text-align:center">{{parseFloat(feedback.robustness).toFixed(2)}}</h2>
         </card>
       </div>      
     </div>
