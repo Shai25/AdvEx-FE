@@ -38,7 +38,7 @@
 <template>
   <form class="dropzone" @submit.prevent="initUpload">
     <div class="upload-form" v-bind:style="{
-      display: fileCnt === 2 ? 'inline-flex' : 'none',
+      display: fileCnt === 2 && !uploading? 'inline-flex' : 'none',
     }">
       <input type="text" id="model_name" required="required" placeholder="Model Name" v-model="model_name"/>
       <button class="btn btn-primary" type="submit">Upload</button>
