@@ -82,7 +82,7 @@ exports.handler = (event, context) => {
 }
 ```
 
-4. Create an API on Amazon API Gateway. Then Create a resource. Finally create a new POST method under the resource.
+4. Create an API on Amazon API Gateway. Then create a resource. Finally create a new POST method under the resource.
 
 5. In `Integration Request`, set type to `Lambda Function` and specify the function created in in step 3.
 
